@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/mI/mI_Button.gd" type="Script" id=1]
+[ext_resource path="res://addons/mI/images/drawing-on.svg" type="Texture" id=2]
+[ext_resource path="res://addons/mI/mI_theme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/mI/images/drawing_off.svg" type="Texture" id=4]
+[ext_resource path="res://addons/mI/mI_Indicator.gd" type="Script" id=5]
+[ext_resource path="res://addons/mI/images/drawing_indicator_circle.svg" type="Texture" id=6]
+[ext_resource path="res://addons/mI/mI_Indicator_rotate.gd" type="Script" id=7]
+[ext_resource path="res://addons/mI/images/fan.svg" type="Texture" id=8]
+[ext_resource path="res://addons/mI/mI_Label.gd" type="Script" id=9]
+[ext_resource path="res://addons/mI/mI_Indicator_Level.gd" type="Script" id=10]
+[ext_resource path="res://addons/mI/mI_progress.tres" type="Theme" id=11]
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2( 0.997373, 1 )
+
+[node name="mI_Button" type="Button" parent="."]
+margin_left = 40.0
+margin_top = 48.0
+margin_right = 240.0
+margin_bottom = 190.0
+theme = ExtResource( 3 )
+icon = ExtResource( 2 )
+script = ExtResource( 1 )
+Tag = "SW1"
+Command = "ON"
+
+[node name="mI_Button2" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 48.0
+margin_right = 457.0
+margin_bottom = 190.0
+theme = ExtResource( 3 )
+icon = ExtResource( 4 )
+clip_text = true
+script = ExtResource( 1 )
+Tag = "SW1"
+Command = "OFF"
+
+[node name="mI_Indicator2" type="Polygon2D" parent="."]
+position = Vector2( 73, 247 )
+scale = Vector2( 6, 6 )
+offset = Vector2( -5, -5 )
+antialiased = true
+texture = ExtResource( 6 )
+polygon = PoolVector2Array( 10, 0, 10, 10, 0, 10, 0, 0 )
+uv = PoolVector2Array( 132, 1, 134, 134, 0, 134, 0, 0 )
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "uI Indicator"
+}
+Tag = "LED"
+OFF_color = Color( 0, 1, 0, 0.141176 )
+Undefined_color = Color( 1, 1, 1, 0.501961 )
+
+[node name="mI_Rotate" type="Sprite" parent="."]
+position = Vector2( 246.757, 293.785 )
+rotation = -1.94953
+scale = Vector2( 0.161082, 0.161082 )
+texture = ExtResource( 8 )
+script = ExtResource( 7 )
+Tag = "LED"
+OFF_color = Color( 0, 1, 0, 1 )
+Rotation_Speed = -270
+Color_change_time = 0.5
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+margin_left = 48.1264
+margin_top = 312.0
+margin_right = 96.1264
+margin_bottom = 360.0
+
+[node name="mI_Label" type="Label" parent="."]
+margin_left = 40.0
+margin_top = 384.0
+margin_right = 457.0
+margin_bottom = 440.0
+theme = ExtResource( 3 )
+text = "Temperature = %s"
+script = ExtResource( 9 )
+Tag = "TEMPERATURE"
+
+[node name="mI_Level" type="ProgressBar" parent="mI_Label"]
+margin_top = 45.0
+margin_right = 401.0
+margin_bottom = 101.0
+theme = ExtResource( 11 )
+script = ExtResource( 10 )

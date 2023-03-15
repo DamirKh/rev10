@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/mI/mI_Button.gd" type="Script" id=1]
+[ext_resource path="res://Node2D_1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/mI/mI_theme.tres" type="Theme" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 45.0
+
+[node name="mI_Button" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_right = 231.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "ON"
+script = ExtResource( 1 )
+Tag = "SW1"
+Command = "ON"
+
+[node name="mI_Button2" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 235.0
+margin_right = 466.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "OFF"
+script = ExtResource( 1 )
+Tag = "SW1"
+Command = "OFF"
+
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( -8, 56 )
+scale = Vector2( 0.7, 0.7 )

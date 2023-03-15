@@ -1,0 +1,213 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/mI/mI_DigitEntry.gd" type="Script" id=1]
+[ext_resource path="res://addons/mI/mi_ControlPopup.gd" type="Script" id=2]
+[ext_resource path="res://addons/mI/mI_theme.tres" type="Theme" id=3]
+
+[node name="mI_DigitEntry" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="mI_ControlPopup" type="Control" parent="."]
+margin_right = 72.0
+margin_bottom = 80.0
+script = ExtResource( 2 )
+UnderMouse = false
+
+[node name="Popup" type="WindowDialog" parent="mI_ControlPopup"]
+margin_top = 21.0
+margin_right = 352.0
+margin_bottom = 448.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+resizable = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="mI_ControlPopup/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="LabelValue" type="Label" parent="mI_ControlPopup/Popup/VBoxContainer"]
+margin_right = 336.0
+margin_bottom = 32.0
+size_flags_vertical = 1
+theme = ExtResource( 3 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="GridContainer" type="GridContainer" parent="mI_ControlPopup/Popup/VBoxContainer"]
+margin_top = 36.0
+margin_right = 336.0
+margin_bottom = 383.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Button7" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_right = 110.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "7"
+
+[node name="Button8" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 114.0
+margin_right = 223.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "8"
+
+[node name="Button9" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 227.0
+margin_right = 336.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "9"
+
+[node name="Button4" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_top = 71.0
+margin_right = 110.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "4"
+
+[node name="Button5" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 114.0
+margin_top = 71.0
+margin_right = 223.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "5"
+
+[node name="Button6" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 227.0
+margin_top = 71.0
+margin_right = 336.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "6"
+
+[node name="Button1" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_top = 141.0
+margin_right = 110.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "1"
+
+[node name="Button2" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 114.0
+margin_top = 141.0
+margin_right = 223.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "2"
+
+[node name="Button3" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 227.0
+margin_top = 141.0
+margin_right = 336.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "3"
+
+[node name="Button0" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_top = 211.0
+margin_right = 110.0
+margin_bottom = 277.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "0"
+
+[node name="ButtonDot" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 114.0
+margin_top = 211.0
+margin_right = 223.0
+margin_bottom = 277.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "."
+
+[node name="Button-" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+margin_left = 227.0
+margin_top = 211.0
+margin_right = 336.0
+margin_bottom = 277.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "-"
+
+[node name="ButtonDEL" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+modulate = Color( 0.972549, 0.980392, 0.0117647, 1 )
+margin_top = 281.0
+margin_right = 110.0
+margin_bottom = 347.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "<"
+
+[node name="ButtonESC" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+modulate = Color( 0.411765, 0.6, 0.964706, 1 )
+margin_left = 114.0
+margin_top = 281.0
+margin_right = 223.0
+margin_bottom = 347.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "ESC"
+
+[node name="ButtonOK" type="Button" parent="mI_ControlPopup/Popup/VBoxContainer/GridContainer"]
+modulate = Color( 0.0392157, 0.980392, 0.00784314, 1 )
+margin_left = 227.0
+margin_top = 281.0
+margin_right = 336.0
+margin_bottom = 347.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "OK"
+
+[connection signal="about_to_show" from="mI_ControlPopup/Popup" to="." method="_on_Popup_about_to_show"]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button7" to="." method="_on_Button_pressed" binds= [ 7 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button8" to="." method="_on_Button_pressed" binds= [ 8 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button9" to="." method="_on_Button_pressed" binds= [ 9 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button4" to="." method="_on_Button_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button5" to="." method="_on_Button_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button6" to="." method="_on_Button_pressed" binds= [ 6 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button1" to="." method="_on_Button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button2" to="." method="_on_Button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button3" to="." method="_on_Button_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button0" to="." method="_on_Button_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/ButtonDot" to="." method="_on_Button_pressed" binds= [ -3 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/Button-" to="." method="_on_Button_pressed" binds= [ -1 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/ButtonDEL" to="." method="_on_Button_pressed" binds= [ -2 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/ButtonESC" to="." method="_on_Button_pressed" binds= [ -5 ]]
+[connection signal="pressed" from="mI_ControlPopup/Popup/VBoxContainer/GridContainer/ButtonOK" to="." method="_on_Button_pressed" binds= [ -6 ]]

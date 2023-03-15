@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/mI/mI_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Label.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 140, 132 )
+color = Color( 0.34902, 0.337255, 0.337255, 1 )
+offset = Vector2( -84, -92 )
+antialiased = true
+polygon = PoolVector2Array( 32, 40, 136, 40, 136, 144, 32, 144 )
+
+[node name="Label" type="Label" parent="Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = -12.0
+margin_right = 34.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 32, 20 )
+theme = ExtResource( 1 )
+text = "123"
+align = 1
+valign = 1
+script = ExtResource( 2 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Polygon2D"]
+__meta__ = {
+"_editor_description_": "ljl
+"
+}
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2( 186, 40 )
+polygon = PoolVector2Array( 32, 40, 136, 40, 136, 144, 32, 144 )
+
+[connection signal="pressed" from="Polygon2D/TouchScreenButton" to="Polygon2D/Label" method="_on_TouchScreenButton_pressed"]
+[connection signal="released" from="Polygon2D/TouchScreenButton" to="Polygon2D/Label" method="_on_TouchScreenButton_released"]
