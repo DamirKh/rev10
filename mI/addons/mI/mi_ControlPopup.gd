@@ -5,24 +5,15 @@ export var Tag = ""
 export var UnderMouse = true
 export var HintModulate = true
 
-onready var NW = get_node("/root/MiNetwork")
 onready var PopupNode = get_node("Popup")
-onready var Parent = get_parent()
 
 var ConfiguredPopupPos : Vector2
 
-#onready var place = Rect2(Parent., Parent.margin_top, PopupNode.rect_size.x, rect_size.y)
+# Point is a Tag resolver and radio receiver
+var Point = load("res://addons/mI/point.gd")
+var point = Point.new()
 
-func _enter_tree():
-	if not Tag:
-		var P = self.get_parent()
-		while P:
-			if "Tag" in P:
-				Tag = P.Tag
-				break
-			else:
-				P = P.get_parent()
-				
+
 func _gui_input(event):
 	if not PopupNode:
 		return
@@ -34,6 +25,7 @@ func _gui_input(event):
 			PopupNode.popup_centered()
 		pass
 
+
 func _notification(what):
 	match what:
 		NOTIFICATION_MOUSE_ENTER:
@@ -43,6 +35,7 @@ func _notification(what):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(point)
 	if not PopupNode:
 		print_debug(self.name, " was not properly configured!")
 		print_debug("No Popup child node!")

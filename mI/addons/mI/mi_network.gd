@@ -1,25 +1,27 @@
 extends Node
 signal Radio(Tag, Value)
+signal Directive(Tag, Value)
+
 
 # The URL we will connect to
-export var websocket_url = "ws://192.168.43.144:7777"
+export var websocket_url = "ws://192.168.0.110:7777"
 #export var websocket_url = "ws://192.168.0.110:7777"
-onready var controls_members = get_tree().get_nodes_in_group("controls")
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
-var _write_mode = WebSocketPeer.WRITE_MODE_TEXT
+#var _write_mode = WebSocketPeer.WRITE_MODE_TEXT
 
 var ReconnectTimer := Timer.new()
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	disable_all_controls()
 	# Connect base signals to get notified of connection open, close, and errors.
 	_client.connect("connection_closed", self, "_closed")
 	_client.connect("connection_error", self, "_closed")
 	_client.connect("connection_established", self, "_connected")
+
 	# This signal is emitted when not using the Multiplayer API every time
 	# a full packet is received.
 	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
@@ -32,8 +34,6 @@ func _ready():
 	add_child(ReconnectTimer)
 	# Initiate connection to the given URL.
 	_on_ReconnectTimer_timeout()
-
-	pass # Replace with function body.
 
 
 func _closed(was_clean = false):
@@ -61,18 +61,16 @@ func _on_ReconnectTimer_timeout():
 
 
 func disable_all_controls():
-	for member in controls_members:
-		member.disable(true)
+	emit_signal("Directive", '*', 'DIS')
 func enable_all_controls():
-	for member in controls_members:
-		member.disable(false)
-
+	emit_signal("Directive", '*', 'EN')
 
 func _process(_delta):
 	# Call this in _process or _physics_process. Data transfer, and signals
 	# emission will only happen when calling this function.
 	var state = _client.get_connection_status()
 	if state == WebSocketClient.CONNECTION_DISCONNECTED:
+		disable_all_controls()
 		return
 	_client.poll()
 
@@ -88,14 +86,12 @@ func _process(_delta):
 			else:
 				print_debug("Message: ", in_message)
 				
-#	elif state == WebSocketClient.:
-#		# Keep polling to achieve proper close.
-#		pass
-#	elif state == WebSocketClient.STATE_CLOSED:
+#	if state == WebSocketClient.STATE_CLOSED:
 #		var code = _client.get_close_code()
 #		var reason = _client.get_close_reason()
 #		print_debug("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
-#		set_process(false) # Stop processing.
+#
+##		set_process(false) # Stop processing.
 
 func _enter_tree():
 	pass
@@ -113,10 +109,6 @@ func _connected(proto = ""):
 	print_debug("Connected with protocol: ", proto)
 	_client.get_peer(1).set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
 	#$PingTimer.start()
-	controls_members = get_tree().get_nodes_in_group("controls")
-	#disable_all_controls()
-	print_debug(controls_members)
-
 	enable_all_controls()
 	# You MUST always use get_peer(1).put_packet to send data to server,
 	# and not put_packet directly when not using the MultiplayerAPI.
@@ -131,15 +123,3 @@ func PhoneCall(from, message, advanced=""):
 	_client.get_peer(1).put_packet(data_to_esp.to_ascii())
 	
 
-#func PhoneCall(from, message, advanced=""):
-#	print_debug("Message from: ", from, "=", message)
-#	match from:
-#		"PUMP":
-#			match message:
-#				"START":
-#					emit_signal("Radio", "PUMP", "RUNNING")
-#				"STOP":
-#					emit_signal("Radio", "PUMP", "STOPPED")
-#		_:
-#			emit_signal("Radio", from, message)
-#

@@ -34,6 +34,11 @@ func clicked():
 func Radio(Value):
 	pass
 
+func Directive(Value):
+	if Value == 'DIS':
+		disabled = true
+	if Value == 'EN':
+		disabled = false
 
 func _on_T_timeout():
 	self.release_focus()

@@ -21,3 +21,4 @@ func _enter_tree():
 func Radio(Value):
 	#print_debug('Label got Radio')
 	self.text = TextFormat%str(Value)
+

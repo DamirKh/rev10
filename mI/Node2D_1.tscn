@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/mI/mI_Button.gd" type="Script" id=1]
 [ext_resource path="res://addons/mI/images/drawing-on.svg" type="Texture" id=2]
@@ -11,8 +11,10 @@
 [ext_resource path="res://addons/mI/mI_Label.gd" type="Script" id=9]
 [ext_resource path="res://addons/mI/mI_Indicator_Level.gd" type="Script" id=10]
 [ext_resource path="res://addons/mI/mI_progress.tres" type="Theme" id=11]
+[ext_resource path="res://Top_Connection_Control/Top_Connection_Control.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2( 0, 15 )
 scale = Vector2( 0.997373, 1 )
 
 [node name="mI_Button" type="Button" parent="."]
@@ -102,3 +104,6 @@ is
 align = 1
 script = ExtResource( 9 )
 Tag = "LED"
+
+[node name="Top_Connection_Control" parent="." instance=ExtResource( 12 )]
+position = Vector2( 0.997368, -21 )
