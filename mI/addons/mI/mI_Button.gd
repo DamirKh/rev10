@@ -2,14 +2,19 @@ extends Button
 
 export var Tag = "Tag"
 export var Command = "*"
-export var Release_focus = 1.2
-onready var NW = get_node("/root/MiNetwork")
+export var Release_focus = 1.0
+
+
 var T := Timer.new()
+
+# Point is a Tag resolver and radio receiver
+var Point = load("res://addons/mI/point.gd")
+var point = Point.new()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.add_to_group('control', true)
+	add_child(point)
 	self.rect_min_size = self.rect_size
 	connect("pressed", self, "clicked")
 	self.hint_tooltip = Tag
@@ -22,23 +27,12 @@ func _ready():
 	T.connect("timeout", self, "_on_T_timeout")
 
 
-
-
-func _enter_tree():
-
-	if not Tag:
-		var P = self.get_parent()
-		while P:
-			if "Tag" in P:
-				Tag = P.Tag
-				break
-			else:
-				P = P.get_parent()
-
-
 func clicked():
-	NW.PhoneCall(Tag, Command)
+	point.PhoneCall(Command)
 	T.start()
+
+func Radio(Value):
+	pass
 
 
 func _on_T_timeout():

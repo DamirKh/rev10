@@ -1,12 +1,16 @@
 extends ProgressBar
 export var Tag = ""
 
-#export var ON_color =  Color(0.0, 1.0, 0.0, 1.0)
-#export var OFF_color =  Color(1.0, 0.0, 0.0, 1.0)
-#export var Undefined_color = Color(1.0, 1.0, 1.0, 0.5)
-#var white = Color(1.0, 1.0, 1.0, 1.0)
-#export var Color_ON =  Color(1.0, 1.0, 1.0, 0.3)
-#export var Color_OFF =  Color(1.0, 1.0, 1.0, 0.3)
+export var HiHiSetpoint = 35.0
+export var HiSetpoint = 30.0
+export var LoSetpoint = 18.0
+export var LoLoSetpoint = 5.0
+
+export var HiHi_color = Color(1.0, 0.0, 0.0, 1.0)
+export var Hi_color = Color(1.0, 1.0, 0.0, 1.0)
+export var normal_color =  Color(0.0, 1.0, 0.0, 1.0)
+export var Lo_color =  Color(1.0, 1.0, 0.0, 1.0)
+export var LoLo_color =  Color(1.0, 0.0, 0.0, 1.0)
 
 
 onready var NW = get_node("/root/MiNetwork")
@@ -34,3 +38,14 @@ func _enter_tree():
 func Radio(TagName, Value):
 	if TagName == Tag:
 		self.value = float(Value)
+		if LoSetpoint < self.value and self.value < HiSetpoint:
+			self_modulate = normal_color
+		if HiSetpoint < self.value and self.value < HiHiSetpoint:
+			self_modulate = Hi_color
+		if HiHiSetpoint < self.value:
+			self_modulate = HiHi_color
+		if LoLoSetpoint < self.value and self.value < LoSetpoint:
+			self_modulate = Lo_color
+		if self.value < LoLoSetpoint:
+			self_modulate = LoLoSetpoint
+

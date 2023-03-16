@@ -65,17 +65,11 @@ OFF_color = Color( 0, 1, 0, 1 )
 Rotation_Speed = -270
 Color_change_time = 0.5
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
-margin_left = 48.1264
-margin_top = 312.0
-margin_right = 96.1264
-margin_bottom = 360.0
-
 [node name="mI_Label" type="Label" parent="."]
-margin_left = 40.0
-margin_top = 384.0
-margin_right = 457.0
-margin_bottom = 440.0
+margin_left = 38.1001
+margin_top = 389.0
+margin_right = 455.1
+margin_bottom = 445.0
 theme = ExtResource( 3 )
 text = "Temperature = %s"
 script = ExtResource( 9 )
@@ -87,3 +81,24 @@ margin_right = 401.0
 margin_bottom = 101.0
 theme = ExtResource( 11 )
 script = ExtResource( 10 )
+
+[node name="mI_Level2" type="ProgressBar" parent="mI_Label"]
+margin_top = 117.0
+margin_right = 401.0
+margin_bottom = 173.0
+theme = ExtResource( 11 )
+percent_visible = false
+script = ExtResource( 10 )
+
+[node name="mI_Label2" type="Label" parent="mI_Label"]
+margin_left = 287.9
+margin_top = -149.0
+margin_right = 392.9
+margin_bottom = -37.0
+theme = ExtResource( 3 )
+text = "Fan
+is
+%s"
+align = 1
+script = ExtResource( 9 )
+Tag = "LED"
