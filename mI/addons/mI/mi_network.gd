@@ -2,9 +2,10 @@ extends Node
 signal Radio(Tag, Value)
 signal Directive(Tag, Value)
 
+var config = ConfigFile.new()
 
 # The URL we will connect to
-export var websocket_url = "ws://192.168.0.110:7777"
+export var websocket_url = "ws://192.168.4.1:7777"
 #export var websocket_url = "ws://192.168.0.110:7777"
 
 # Our WebSocketClient instance
@@ -17,15 +18,18 @@ var ReconnectTimer := Timer.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	disable_all_controls()
+	
+	# Load config file
+	var err = config.load("user://config.ini")
+	# If the file didn't load, ignore it.
+	if err == OK:
+		websocket_url = config.get_value('ESP', "URL")
+		print_debug('Load ESP URL ', websocket_url)
+	
 	# Connect base signals to get notified of connection open, close, and errors.
 	_client.connect("connection_closed", self, "_closed")
 	_client.connect("connection_error", self, "_closed")
 	_client.connect("connection_established", self, "_connected")
-
-	# This signal is emitted when not using the Multiplayer API every time
-	# a full packet is received.
-	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
-	# _client.connect("data_received", self, "_on_data")
 
 	# # Initiate reconnection timer
 	ReconnectTimer.wait_time = 5.0

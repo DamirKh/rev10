@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Top_Connection_Control/PlugButton.gd" type="Script" id=1]
+[ext_resource path="res://Top_Connection_Control/plug.svg" type="Texture" id=2]
+
+[node name="Navigation_Control" type="Node2D"]
+position = Vector2( 2, -1 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 386.0
+margin_bottom = 517.0
+rect_scale = Vector2( 0.0800006, 0.0800006 )
+texture_normal = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_TextureButton_pressed"]

@@ -11,7 +11,7 @@
 [ext_resource path="res://addons/mI/mI_Label.gd" type="Script" id=9]
 [ext_resource path="res://addons/mI/mI_Indicator_Level.gd" type="Script" id=10]
 [ext_resource path="res://addons/mI/mI_progress.tres" type="Theme" id=11]
-[ext_resource path="res://Top_Connection_Control/Top_Connection_Control.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Top_Connection_Control/Navigation_Control.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 0, 15 )
@@ -105,5 +105,5 @@ align = 1
 script = ExtResource( 9 )
 Tag = "LED"
 
-[node name="Top_Connection_Control" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0.997368, -21 )
+[node name="Navigation_Control" parent="." instance=ExtResource( 12 )]
+position = Vector2( 0.997366, -10 )
