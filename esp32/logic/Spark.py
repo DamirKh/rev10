@@ -18,6 +18,8 @@ class Spark:
             return False
         if ticks_diff(ticks_ms(), self._dn_time) > 0:
             self._dn_time = ticks_add(self._dn_time, self.period)
+            if ticks_diff(ticks_ms(), self._dn_time):    # we are past in time more then period leght
+                self._dn_time = ticks_add(ticks_ms(), self.period)  #and let's start from this this moment again
             return True
         else:
             return False
