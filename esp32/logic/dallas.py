@@ -29,11 +29,9 @@ class Dallas:
 
                 for c in range(len(self._chips)):
                     self._values[c] = self._ds.read_temp(self._chips[c])
-                    # print(self._values)
+                    #print(self._values)
                     await asyncio.sleep(0)
 
-                for c in range(len(self._chips)):
-                    self._values[c] = float('inf')
             await asyncio.sleep_ms(self._poll_period - self._convert_time)
 
     def __len__(self):

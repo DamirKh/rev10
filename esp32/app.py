@@ -44,7 +44,6 @@ def onstart():
 def normal():
     # print("application normal executed")
     # print("ON" if SW1() else "OFF")
-    S3000.EN = True
     T1.EN = (SW_ON.ON or T1.TT) and not SW_OFF.ON
 
     if S3000.SPARK:

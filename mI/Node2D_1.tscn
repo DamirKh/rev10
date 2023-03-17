@@ -15,11 +15,11 @@
 [ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=13]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( -45, 14 )
+position = Vector2( -41, 6 )
 scale = Vector2( 0.7, 0.7 )
 
 [node name="Navigation_Control" parent="." instance=ExtResource( 12 )]
-position = Vector2( 92.2857, -16.9527 )
+position = Vector2( 88, -2.66699 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="mI_Organizer2" type="Node2D" parent="."]
@@ -98,7 +98,7 @@ Tag = "TEMPERATURE"
 [node name="mI_Level2" type="ProgressBar" parent="mI_Organizer"]
 margin_left = -73.0
 margin_top = 387.0
-margin_right = 509.0
+margin_right = 495.0
 margin_bottom = 443.0
 theme = ExtResource( 11 )
 percent_visible = false
