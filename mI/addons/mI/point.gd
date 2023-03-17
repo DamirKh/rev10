@@ -21,7 +21,7 @@ func _ready():
 	
 	if not ancestor.Tag:  # Looking for Tag property in ancestor up
 		while ancestor:
-			if 'Tag' in ancestor:
+			if ancestor.Tag:
 				Tag = ancestor.Tag
 				P.Tag = Tag
 				break

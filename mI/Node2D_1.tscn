@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://addons/mI/mI_Button.gd" type="Script" id=1]
 [ext_resource path="res://addons/mI/images/drawing-on.svg" type="Texture" id=2]
@@ -12,12 +12,17 @@
 [ext_resource path="res://addons/mI/mI_Indicator_Level.gd" type="Script" id=10]
 [ext_resource path="res://addons/mI/mI_progress.tres" type="Theme" id=11]
 [ext_resource path="res://Top_Connection_Control/Navigation_Control.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=13]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 0, 15 )
 scale = Vector2( 1.5, 1.5 )
 
-[node name="mI_Button" type="Button" parent="."]
+[node name="mI_Organizer2" type="Node2D" parent="."]
+script = ExtResource( 13 )
+Tag = "SW1"
+
+[node name="mI_Button" type="Button" parent="mI_Organizer2"]
 margin_left = 40.0
 margin_top = 48.0
 margin_right = 240.0
@@ -25,10 +30,10 @@ margin_bottom = 190.0
 theme = ExtResource( 3 )
 icon = ExtResource( 2 )
 script = ExtResource( 1 )
-Tag = "SW1"
+Tag = ""
 Command = "ON"
 
-[node name="mI_Button2" type="Button" parent="."]
+[node name="mI_Button2" type="Button" parent="mI_Organizer2"]
 margin_left = 256.0
 margin_top = 48.0
 margin_right = 457.0
@@ -37,7 +42,7 @@ theme = ExtResource( 3 )
 icon = ExtResource( 4 )
 clip_text = true
 script = ExtResource( 1 )
-Tag = "SW1"
+Tag = ""
 Command = "OFF"
 
 [node name="mI_Indicator2" type="Polygon2D" parent="."]
@@ -67,7 +72,24 @@ OFF_color = Color( 0, 1, 0, 1 )
 Rotation_Speed = -270
 Color_change_time = 0.5
 
-[node name="mI_Label" type="Label" parent="."]
+[node name="mI_Label2" type="Label" parent="."]
+margin_left = 326.0
+margin_top = 240.0
+margin_right = 431.0
+margin_bottom = 352.0
+theme = ExtResource( 3 )
+text = "Fan
+is
+%s"
+align = 1
+script = ExtResource( 9 )
+Tag = "LED"
+
+[node name="mI_Organizer" type="Node2D" parent="."]
+script = ExtResource( 13 )
+Tag = "TEMPERATURE"
+
+[node name="mI_Label" type="Label" parent="mI_Organizer"]
 margin_left = 38.1001
 margin_top = 389.0
 margin_right = 455.1
@@ -77,33 +99,22 @@ text = "Temperature = %s"
 script = ExtResource( 9 )
 Tag = "TEMPERATURE"
 
-[node name="mI_Level" type="ProgressBar" parent="mI_Label"]
-margin_top = 45.0
-margin_right = 401.0
-margin_bottom = 101.0
+[node name="mI_Level" type="ProgressBar" parent="mI_Organizer"]
+margin_left = 38.1001
+margin_top = 434.0
+margin_right = 439.1
+margin_bottom = 490.0
 theme = ExtResource( 11 )
 script = ExtResource( 10 )
 
-[node name="mI_Level2" type="ProgressBar" parent="mI_Label"]
-margin_top = 117.0
-margin_right = 401.0
-margin_bottom = 173.0
+[node name="mI_Level2" type="ProgressBar" parent="mI_Organizer"]
+margin_left = 38.1001
+margin_top = 506.0
+margin_right = 439.1
+margin_bottom = 562.0
 theme = ExtResource( 11 )
 percent_visible = false
 script = ExtResource( 10 )
-
-[node name="mI_Label2" type="Label" parent="mI_Label"]
-margin_left = 287.9
-margin_top = -149.0
-margin_right = 392.9
-margin_bottom = -37.0
-theme = ExtResource( 3 )
-text = "Fan
-is
-%s"
-align = 1
-script = ExtResource( 9 )
-Tag = "LED"
 
 [node name="Navigation_Control" parent="." instance=ExtResource( 12 )]
 position = Vector2( 0.997366, -10 )
