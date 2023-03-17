@@ -5,7 +5,6 @@ import G
 from machine import Pin
 from logic import switch_ladder, dallas
 #from neopixel import NeoPixel
-import ds18x20, onewire
 
 # Switches
 G.DEVICES['SW_ON'] = switch_ladder.Switch_ladder(Pin(16, Pin.IN), inverted=True)
@@ -18,7 +17,7 @@ G.DEVICES['LED1'] = Pin(3, Pin.OUT)
 
 
 # Dallas 18B20 temperature sensor
-G.DEVICES['DALLAS'] = dallas.Dallas(4, poll_period=2_000)
+G.DEVICES['DALLAS'] = dallas.Dallas(4, poll_period=10_000)
 
 
 print(G.DEVICES)
