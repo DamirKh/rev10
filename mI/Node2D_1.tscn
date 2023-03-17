@@ -15,7 +15,7 @@
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 0, 15 )
-scale = Vector2( 0.997373, 1 )
+scale = Vector2( 1.5, 1.5 )
 
 [node name="mI_Button" type="Button" parent="."]
 margin_left = 40.0

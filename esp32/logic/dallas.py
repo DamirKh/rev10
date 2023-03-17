@@ -19,13 +19,21 @@ class Dallas:
 
     async def measure(self):
         while True:
-            self._ds.convert_temp()
-            # print('.')
-            await asyncio.sleep_ms(self._convert_time)
-            for c in range(len(self._chips)):
-                self._values[c] = self._ds.read_temp(self._chips[c])
-                # print(self._values)
-                await asyncio.sleep(0)
+            if len(self._chips):
+                try:
+                    self._ds.convert_temp()
+                    await asyncio.sleep_ms(self._convert_time)
+                except onewire.OneWireError:   # Temperature sensors are offline
+                    print(" !!! Can't measure temperature")
+                    continue
+
+                for c in range(len(self._chips)):
+                    self._values[c] = self._ds.read_temp(self._chips[c])
+                    # print(self._values)
+                    await asyncio.sleep(0)
+
+                for c in range(len(self._chips)):
+                    self._values[c] = float('inf')
             await asyncio.sleep_ms(self._poll_period - self._convert_time)
 
     def __len__(self):
@@ -36,9 +44,12 @@ class Dallas:
 
     @property
     def VALUE(self):
-        s = sum(self._values)
-        a = s / len(self._values)
-        return a
+        if len(self._chips):
+            s = sum(self._values)
+            a = s / len(self._values)
+            return a
+        else:
+            return float('inf')
 
     def deinit(self):
         self._run.cancel()

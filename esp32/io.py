@@ -4,15 +4,15 @@ this file defines the hardware features of the project. Relays, buttons, LEDs, A
 import G
 from machine import Pin
 from logic import switch_ladder, dallas
-from neopixel import NeoPixel
+#from neopixel import NeoPixel
 import ds18x20, onewire
 
 # Switches
-G.DEVICES['SW_ON'] = switch_ladder.Switch_ladder(Pin(22, Pin.IN), inverted=True)
-G.DEVICES['SW_OFF'] = switch_ladder.Switch_ladder(Pin(19, Pin.IN), inverted=True)
+G.DEVICES['SW_ON'] = switch_ladder.Switch_ladder(Pin(16, Pin.IN), inverted=True)
+G.DEVICES['SW_OFF'] = switch_ladder.Switch_ladder(Pin(17, Pin.IN), inverted=True)
 
 # LEDS/RELAYS
-G.DEVICES['LED1'] = Pin(23, Pin.OUT)
+G.DEVICES['LED1'] = Pin(3, Pin.OUT)
 
 # Onboard NeoPixel LED
 

@@ -47,5 +47,5 @@ func Radio(TagName, Value):
 		if LoLoSetpoint < self.value and self.value < LoSetpoint:
 			self_modulate = Lo_color
 		if self.value < LoLoSetpoint:
-			self_modulate = LoLoSetpoint
+			self_modulate = LoLo_color
 
