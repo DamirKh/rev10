@@ -6,7 +6,8 @@
 [ext_resource path="res://Top_Connection_Control/forward.svg" type="Texture" id=4]
 
 [node name="Navigation_Control" type="Node2D"]
-position = Vector2( 2, -1 )
+position = Vector2( -9, 7 )
+scale = Vector2( 0.4, 0.4 )
 
 [node name="TextureButtonLeft" type="TextureButton" parent="."]
 margin_left = 36.0
