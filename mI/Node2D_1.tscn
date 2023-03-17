@@ -15,10 +15,11 @@
 [ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=13]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( 0, 15 )
+position = Vector2( 3, 111 )
 scale = Vector2( 1.5, 1.5 )
 
 [node name="mI_Organizer2" type="Node2D" parent="."]
+position = Vector2( 105.333, 29.3333 )
 script = ExtResource( 13 )
 Tag = "SW1"
 
@@ -46,7 +47,7 @@ Tag = ""
 Command = "OFF"
 
 [node name="mI_Indicator2" type="Polygon2D" parent="."]
-position = Vector2( 73, 247 )
+position = Vector2( 86, 143.333 )
 scale = Vector2( 6, 6 )
 offset = Vector2( -5, -5 )
 antialiased = true
@@ -62,7 +63,7 @@ OFF_color = Color( 0, 1, 0, 0.141176 )
 Undefined_color = Color( 1, 1, 1, 0.501961 )
 
 [node name="mI_Rotate" type="Sprite" parent="."]
-position = Vector2( 246.757, 293.785 )
+position = Vector2( 276.667, 324 )
 rotation = -1.94953
 scale = Vector2( 0.161082, 0.161082 )
 texture = ExtResource( 8 )
@@ -73,10 +74,10 @@ Rotation_Speed = -270
 Color_change_time = 0.5
 
 [node name="mI_Label2" type="Label" parent="."]
-margin_left = 326.0
-margin_top = 240.0
-margin_right = 431.0
-margin_bottom = 352.0
+margin_left = 339.333
+margin_top = 264.667
+margin_right = 444.333
+margin_bottom = 376.667
 theme = ExtResource( 3 )
 text = "Fan
 is
@@ -86,6 +87,7 @@ script = ExtResource( 9 )
 Tag = "LED"
 
 [node name="mI_Organizer" type="Node2D" parent="."]
+position = Vector2( 128, 38 )
 script = ExtResource( 13 )
 Tag = "TEMPERATURE"
 
@@ -117,4 +119,5 @@ percent_visible = false
 script = ExtResource( 10 )
 
 [node name="Navigation_Control" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0.997366, -10 )
+position = Vector2( 5.33333, -40 )
+scale = Vector2( 0.653333, 0.493333 )
