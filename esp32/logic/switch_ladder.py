@@ -11,6 +11,10 @@ class PinInversable():
 
 
 class Switch_ladder(Switch):
+    """
+    Simple switch input device with debounce = 50ms
+    and configurable input invertion
+    """
     def __init__(self, pin, inverted=False):
         self._pin_inversable = PinInversable(pin, inverted)
         Switch.__init__(self, self._pin_inversable)

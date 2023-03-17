@@ -3,7 +3,6 @@ this file defines the hardware features of the project. Relays, buttons, LEDs, A
 """
 import G
 from machine import Pin
-import primitives
 from logic import switch_ladder, dallas
 from neopixel import NeoPixel
 import ds18x20, onewire
