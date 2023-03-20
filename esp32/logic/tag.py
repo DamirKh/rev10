@@ -90,3 +90,37 @@ class RealInputTag(BaseInputTag):
         self._value = v
 
         self._value = float(val)
+
+
+class IntOutputTag(BaseOutputTag):
+    def __init__(self, name: str, fmt: str = ' {:-d}'):
+        BaseOutputTag.__init__(self, name)
+        self._fmt = fmt
+
+    def trigger(self):
+        G.OUT_QUEUE.put_nowait(self._name + self._fmt.format(self._value))
+
+    @property
+    def VALUE(self):
+        return self._value
+
+    @VALUE.setter
+    def VALUE(self, val: int):
+        val_int = int(val)
+        if val_int == self._value:  # nothing to do. Not even trigger
+            return
+        self._value = val_int
+        self.trigger()
+
+
+class IntInputTag(BaseInputTag):
+    def __init__(self, name: str):
+        BaseInputTag.__init__(self, name)
+
+    def trigger(self, val: str):
+        try:
+            v = int(val)
+        except ValueError:
+            # here should be an error message to hmi
+            return
+        self._value = v

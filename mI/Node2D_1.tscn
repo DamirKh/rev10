@@ -113,3 +113,15 @@ theme = ExtResource( 3 )
 text = "Temperature = %s"
 script = ExtResource( 9 )
 Tag = "TEMPERATURE"
+
+[node name="mI_Label" type="Label" parent="."]
+margin_left = 157.143
+margin_top = 475.714
+margin_right = 283.143
+margin_bottom = 531.714
+theme = ExtResource( 3 )
+text = "%s"
+align = 2
+valign = 1
+script = ExtResource( 9 )
+Tag = "WORK_CNT"

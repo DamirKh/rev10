@@ -2,19 +2,23 @@ PERIOD = 20  # ms
 
 import G
 from logic.timer import Timer
+from logic.counter import Counter
 from logic.Seq import Seq
 from logic.Spark import Spark
 from logic.revert import Revert
+from logic.OneShoot import OneShoot
 from logic import tag
 from uasyncio import sleep_ms as PAUSE
 
 # ############################# always accessible devices
 
 
-###############################  timers
+# ##############################  timers, counters, sparks
 
 T1 = Timer(8_000)
-S3000 = Spark(3000)
+WorkingTimeCounter = Counter()
+OneSecondSpark = Spark(1000)
+ONS = OneShoot()
 
 # ############################# reversibles
 R0 = Revert(False)
@@ -30,25 +34,29 @@ on_command = tag.DiscreteInputTag('SW1')
 led_on = tag.DiscreteOutputTag('LED')
 TEMPERATURE = tag.RealOutputTag("TEMPERATURE")
 TEMPERATURE.VALUE = DALLAS.VALUE
+WORK_CNT = tag.IntOutputTag('WORK_CNT')
 
 
 def onstart():
     print('Start application')
-    S3000.EN = True
-    # place start code here
-    #
-    #
-    await PAUSE(1_000)
+    # Start code below
+    OneSecondSpark.EN = True
+    await PAUSE(500)
 
 
 def normal():
-    # print("application normal executed")
-    # print("ON" if SW1() else "OFF")
+    OneSecondSpark.EN = True
+    # application normal execution code below
     T1.EN = (SW_ON.ON or T1.TT) and not SW_OFF.ON
+    ONS.EN = on_command.VALUE
+    if ONS:
+        print('1')
 
-    if S3000.SPARK:
+    WorkingTimeCounter.UP = OneSecondSpark.SPARK and LED1.value()
+    #print(WorkingTimeCounter.ACC)
+    if WorkingTimeCounter.UP:
+        WORK_CNT.VALUE = WorkingTimeCounter.ACC
         TEMPERATURE.VALUE = DALLAS.VALUE
-        TEMPERATURE.trigger()
 
     LED1(T1.TT or on_command.VALUE)
     led_on.VALUE = LED1()
