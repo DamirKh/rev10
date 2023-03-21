@@ -1,12 +1,12 @@
 PERIOD = 20  # ms
 
 import G
-from logic.timer import Timer
-from logic.counter import Counter
-from logic.Seq import Seq
-from logic.Spark import Spark
-from logic.revert import Revert
-from logic.OneShoot import OneShoot
+from logic import Timer
+from logic import Counter
+from logic import Seq
+from logic import Spark
+from logic import Revert
+from logic import OneShoot
 from logic import tag
 from uasyncio import sleep_ms as PAUSE
 

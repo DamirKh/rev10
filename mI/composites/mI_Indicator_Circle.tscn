@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/mI/mI_Indicator.gd" type="Script" id=1]
+[ext_resource path="res://addons/mI/images/drawing_indicator_circle.svg" type="Texture" id=2]
+
+[node name="mI_Indicator2" type="Polygon2D"]
+scale = Vector2( 6, 6 )
+offset = Vector2( -5, -5 )
+antialiased = true
+texture = ExtResource( 2 )
+polygon = PoolVector2Array( 10, 0, 10, 10, 0, 10, 0, 0 )
+uv = PoolVector2Array( 132, 1, 134, 134, 0, 134, 0, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "uI Indicator"
+}
+OFF_color = Color( 0, 1, 0, 0.141176 )
+Undefined_color = Color( 1, 1, 1, 0.501961 )

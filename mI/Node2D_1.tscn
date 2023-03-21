@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/mI/mI_Button.gd" type="Script" id=1]
 [ext_resource path="res://addons/mI/images/drawing-on.svg" type="Texture" id=2]
 [ext_resource path="res://addons/mI/mI_theme.tres" type="Theme" id=3]
 [ext_resource path="res://addons/mI/images/drawing_off.svg" type="Texture" id=4]
-[ext_resource path="res://addons/mI/mI_Indicator.gd" type="Script" id=5]
-[ext_resource path="res://addons/mI/images/drawing_indicator_circle.svg" type="Texture" id=6]
+[ext_resource path="res://composites/mI_Indicator_Circle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/mI/mI_Indicator_rotate.gd" type="Script" id=7]
 [ext_resource path="res://addons/mI/images/fan.svg" type="Texture" id=8]
 [ext_resource path="res://addons/mI/mI_Label.gd" type="Script" id=9]
@@ -50,21 +49,9 @@ script = ExtResource( 1 )
 Tag = ""
 Command = "OFF"
 
-[node name="mI_Indicator2" type="Polygon2D" parent="."]
-position = Vector2( 137.429, 313.333 )
-scale = Vector2( 6, 6 )
-offset = Vector2( -5, -5 )
-antialiased = true
-texture = ExtResource( 6 )
-polygon = PoolVector2Array( 10, 0, 10, 10, 0, 10, 0, 0 )
-uv = PoolVector2Array( 132, 1, 134, 134, 0, 134, 0, 0 )
-script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": "uI Indicator"
-}
+[node name="mI_Indicator2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 167.143, 311.429 )
 Tag = "LED"
-OFF_color = Color( 0, 1, 0, 0.141176 )
-Undefined_color = Color( 1, 1, 1, 0.501961 )
 
 [node name="mI_Rotate" type="Sprite" parent="."]
 position = Vector2( 277.334, 313.333 )

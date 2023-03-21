@@ -1,4 +1,4 @@
-class OneShoot():
+class OneShoot:
     def __init__(self):
         self._read = False
         self._val = False

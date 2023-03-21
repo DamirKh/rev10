@@ -20,6 +20,12 @@ A simple terminal UI for git commands, written in Go
 
 [Git для ленивых: обзор консольной утилиты Lazygit / Хабр](https://habr.com/ru/company/flant/blog/712874/)  (Russian intro to Lazygit)
 
+##### Git Extensions
+
+Git Extensions is a standalone UI tool for managing git repositories. It also integrates with Windows Explorer and Microsoft Visual Studio (2015/2017/2019).
+
+[GitHub - gitextensions/gitextensions: Git Extensions is a standalone UI tool for managing git repositories. It also integrates with Windows Explorer and Microsoft Visual Studio (2015/2017/2019).](https://github.com/gitextensions/gitextensions)
+
 ## Just some useful tips.
 
 ##### Viewports
