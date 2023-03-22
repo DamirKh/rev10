@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://composites/buttons/images/on_pressed.svg" type="Texture" id=1]
+[ext_resource path="res://addons/mI/mI_TextureButton.gd" type="Script" id=2]
+[ext_resource path="res://composites/buttons/images/on_normal.svg" type="Texture" id=3]
+
+[node name="mI_TextureButton" type="TextureButton"]
+margin_right = 93.0
+margin_bottom = 94.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 1 )
+script = ExtResource( 2 )
+Command = "ON"

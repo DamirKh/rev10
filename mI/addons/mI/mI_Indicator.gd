@@ -17,7 +17,7 @@ func _ready():
 	self.color = Undefined_color
 	pass # Replace with function body.
 
-func _enter_tree():
+func _enter_tree():  ## TODO!  ADD point child here!
 	if not Tag:
 		var P = self.get_parent()
 		while P:

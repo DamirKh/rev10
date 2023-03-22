@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://addons/mI/mI_Button.gd" type="Script" id=1]
-[ext_resource path="res://addons/mI/images/drawing-on.svg" type="Texture" id=2]
 [ext_resource path="res://addons/mI/mI_theme.tres" type="Theme" id=3]
-[ext_resource path="res://addons/mI/images/drawing_off.svg" type="Texture" id=4]
 [ext_resource path="res://composites/mI_Indicator_Circle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://composites/buttons/Button_ON.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/mI/mI_Indicator_rotate.gd" type="Script" id=7]
 [ext_resource path="res://addons/mI/images/fan.svg" type="Texture" id=8]
 [ext_resource path="res://addons/mI/mI_Label.gd" type="Script" id=9]
@@ -12,6 +10,7 @@
 [ext_resource path="res://addons/mI/mI_progress.tres" type="Theme" id=11]
 [ext_resource path="res://Top_Connection_Control/Navigation_Control.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=13]
+[ext_resource path="res://composites/buttons/Button_OFF.tscn" type="PackedScene" id=14]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( -41, 6 )
@@ -22,32 +21,25 @@ position = Vector2( 88, -2.66699 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="mI_Organizer2" type="Node2D" parent="."]
-position = Vector2( 105.333, 29.3333 )
+position = Vector2( 186.762, -420.667 )
 script = ExtResource( 13 )
 Tag = "SW1"
 
-[node name="mI_Button" type="Button" parent="mI_Organizer2"]
-margin_left = 40.0
-margin_top = 48.0
-margin_right = 240.0
-margin_bottom = 190.0
-theme = ExtResource( 3 )
-icon = ExtResource( 2 )
-script = ExtResource( 1 )
-Tag = ""
-Command = "ON"
+[node name="mI_TextureButton" parent="mI_Organizer2" instance=ExtResource( 6 )]
+self_modulate = Color( 0.0392157, 0.803922, 0.215686, 1 )
+margin_left = -3.904
+margin_top = 484.524
+margin_right = 89.096
+margin_bottom = 578.524
+rect_scale = Vector2( 2, 2 )
 
-[node name="mI_Button2" type="Button" parent="mI_Organizer2"]
-margin_left = 256.0
-margin_top = 48.0
-margin_right = 457.0
-margin_bottom = 190.0
-theme = ExtResource( 3 )
-icon = ExtResource( 4 )
-clip_text = true
-script = ExtResource( 1 )
-Tag = ""
-Command = "OFF"
+[node name="mI_TextureButton2" parent="mI_Organizer2" instance=ExtResource( 14 )]
+self_modulate = Color( 0.94902, 0.423529, 0.423529, 1 )
+margin_left = 181.81
+margin_top = 483.524
+margin_right = 274.81
+margin_bottom = 577.524
+rect_scale = Vector2( 2, 2 )
 
 [node name="mI_Indicator2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 167.143, 311.429 )
