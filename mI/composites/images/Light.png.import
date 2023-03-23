@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/on_pressed.svg-8a61e0fdd4992e6d2ef084faff7170b0.stex"
+path="res://.import/Light.png-72929773a06625786f62a384b93ec754.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://composites/buttons/images/on_pressed.svg"
-dest_files=[ "res://.import/on_pressed.svg-8a61e0fdd4992e6d2ef084faff7170b0.stex" ]
+source_file="res://composites/images/Light.png"
+dest_files=[ "res://.import/Light.png-72929773a06625786f62a384b93ec754.stex" ]
 
 [params]
 

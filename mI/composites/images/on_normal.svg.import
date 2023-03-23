@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/off_normal.svg-023f7bdedc9d6542e068156e86efe983.stex"
+path="res://.import/on_normal.svg-1307c5f448d3307b68ac732e5fedc37b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://composites/buttons/images/off_normal.svg"
-dest_files=[ "res://.import/off_normal.svg-023f7bdedc9d6542e068156e86efe983.stex" ]
+source_file="res://composites/images/on_normal.svg"
+dest_files=[ "res://.import/on_normal.svg-1307c5f448d3307b68ac732e5fedc37b.stex" ]
 
 [params]
 

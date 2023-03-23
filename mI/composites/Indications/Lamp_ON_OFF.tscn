@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=1]
+[ext_resource path="res://composites/images/Lamp.png" type="Texture" id=2]
+[ext_resource path="res://composites/images/Light.png" type="Texture" id=3]
+[ext_resource path="res://addons/mI/ShowSelector.gd" type="Script" id=4]
+
+[node name="mI_Organizer" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="mI_ShowSelector" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="DIS" type="Sprite" parent="mI_ShowSelector"]
+self_modulate = Color( 1, 1, 1, 0.113725 )
+texture = ExtResource( 2 )
+
+[node name="ON" type="Sprite" parent="mI_ShowSelector"]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="mI_ShowSelector/ON"]
+scale = Vector2( 1.34553, 1.34553 )
+texture = ExtResource( 3 )
+
+[node name="OFF" type="Sprite" parent="mI_ShowSelector"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.427451 )
+texture = ExtResource( 2 )
