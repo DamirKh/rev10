@@ -8,10 +8,14 @@ from logic import Spark
 from logic import Revert
 from logic import OneShoot
 from logic import tag
+from logic import  PID
 from uasyncio import sleep_ms as PAUSE
 
 # ############################# always accessible devices
 
+
+# ############################## PIDs
+pid_t = PID('pid_t')
 
 # ##############################  timers, counters, sparks
 

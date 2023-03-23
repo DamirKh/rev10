@@ -65,7 +65,9 @@ func _on_ReconnectTimer_timeout():
 
 
 func disable_all_controls():
-	emit_signal("Directive", '*', 'DIS')
+	# comment next line for Local debug
+	#emit_signal("Directive", '*', 'DIS')
+	pass
 func enable_all_controls():
 	emit_signal("Directive", '*', 'EN')
 
@@ -121,8 +123,8 @@ func _connected(proto = ""):
 
 func PhoneCall(from, message, advanced=""):
 	print_debug("HMI Message to ESP32: ", from, " ", message)
-	#emit_signal("Radio", from, message)
-#	_client.send_text(from + ' ' + message)
+	# Uncomment next line for local debug. 
+	emit_signal("Radio", from, message)
 	var data_to_esp = from + ' ' + message
 	_client.get_peer(1).put_packet(data_to_esp.to_ascii())
 	
