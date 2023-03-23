@@ -16,6 +16,7 @@ from uasyncio import sleep_ms as PAUSE
 
 # ############################## PIDs
 pid_t = PID('pid_t')
+pid_t.save_config()
 
 # ##############################  timers, counters, sparks
 
