@@ -23,7 +23,8 @@ class Timer:
 
     @EN.setter
     def EN(self, bit: bool):
-        """Enable counting"""
+        """Enable counting if TRUE
+        If FALSE - stop counter, reset ACC, reset DN"""
         if not bit:
             self._enabled = False
             self._done = False
@@ -43,13 +44,15 @@ class Timer:
 
     @property
     def DN(self):
-        """Done counting bit"""
+        """Done counting bit
+        TRUE if the timer has reached the preset """
         self._tick()
         return self._enabled and self._done
 
     @property
     def ACC(self):
-        """Accumulator"""
+        """Accumulator
+        Time in milliseconds since the timer was enabled, e.g. EN=TRUE"""
         if not self._enabled:
             return 0
         else:

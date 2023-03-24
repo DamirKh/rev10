@@ -115,3 +115,41 @@ Tag = "WORK_CNT"
 [node name="mI_Organizer3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 517.143, 311.429 )
 Tag = "LED"
+
+[node name="mI_Organizer4" type="Node2D" parent="."]
+script = ExtResource( 13 )
+Tag = "AUTO"
+
+[node name="mI_Label" type="Label" parent="mI_Organizer4"]
+margin_left = 157.143
+margin_top = 577.143
+margin_right = 548.143
+margin_bottom = 644.143
+theme = ExtResource( 3 )
+text = "Temperature controller 
+auto mode = %s"
+align = 1
+script = ExtResource( 9 )
+
+[node name="mI_TextureButton" parent="mI_Organizer4/mI_Label" instance=ExtResource( 6 )]
+margin_left = 1.52588e-05
+margin_top = 88.5714
+margin_bottom = 182.571
+
+[node name="mI_TextureButton2" parent="mI_Organizer4/mI_Label" instance=ExtResource( 14 )]
+margin_left = 125.714
+margin_top = 88.5714
+margin_right = 218.714
+margin_bottom = 182.571
+
+[node name="mI_Level" type="ProgressBar" parent="mI_Organizer4/mI_Label"]
+margin_left = -14.2857
+margin_top = 182.857
+margin_right = 404.714
+margin_bottom = 214.857
+script = ExtResource( 10 )
+Tag = "POWER"
+HiHiSetpoint = 90.0
+HiSetpoint = 80.0
+LoSetpoint = 20.0
+LoLoSetpoint = 10.0
