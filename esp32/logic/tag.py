@@ -69,7 +69,7 @@ class RealOutputTag(BaseOutputTag):
 
     @VALUE.setter
     def VALUE(self, val: float):
-        self._value = float(val)
+        self._value = float(val) if val is not None else float('inf')
         self.trigger()
 
 
@@ -88,8 +88,7 @@ class RealInputTag(BaseInputTag):
         v = max(self._low, v)
         v = min(self._high, v)
         self._value = v
-
-        self._value = float(val)
+        #print('RealInputTag {}. Value = {}'.format(self._name, self._value))
 
 
 class IntOutputTag(BaseOutputTag):
