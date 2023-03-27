@@ -29,7 +29,7 @@ print('PID control')
 """Ivmech PID Controller is simple implementation of a Proportional-Integral-Derivative (PID) Controller in the Python Programming Language.
 More information about PID Controller: http://en.wikipedia.org/wiki/PID_controller
 """
-import time, random
+import time, random, logging, math
 
 
 class PID:
@@ -130,39 +130,132 @@ class PID:
         """
         self.sample_time = sample_time
 
+TUNE_PID_DELTA = 5.0
 
-def external_influence(rand = 1.0, sinus = 5):
-    i = 1000
-    while i>0:
-        i-=1
-        yield random.uniform(-rand, rand)
+class ControlAutoTune:
+    def __init__(self, heater, target):
+        self.heater = heater
+        self.heater_max_power = heater.get_max_power()
+        self.calibrate_temp = target
+        # Heating control
+        self.heating = False
+        self.peak = 0.
+        self.peak_time = 0.
+        # Peak recording
+        self.peaks = []
+        # Sample recording
+        self.last_pwm = 0.
+        self.pwm_samples = []
+        self.temp_samples = []
+
+    # Heater control
+    def set_pwm(self, read_time, value):
+        if value != self.last_pwm:
+            self.pwm_samples.append(
+                (read_time + self.heater.get_pwm_delay(), value))
+            self.last_pwm = value
+        self.heater.set_pwm(read_time, value)
+
+    def temperature_update(self, read_time, temp, target_temp):
+        self.temp_samples.append((read_time, temp))
+        # Check if the temperature has crossed the target and
+        # enable/disable the heater if so.
+        if self.heating and temp >= target_temp:
+            self.heating = False
+            self.check_peaks()
+            self.heater.alter_target(self.calibrate_temp - TUNE_PID_DELTA)
+        elif not self.heating and temp <= target_temp:
+            self.heating = True
+            self.check_peaks()
+            self.heater.alter_target(self.calibrate_temp)
+        # Check if this temperature is a peak and record it if so
+        if self.heating:
+            self.set_pwm(read_time, self.heater_max_power)
+            if temp < self.peak:
+                self.peak = temp
+                self.peak_time = read_time
+        else:
+            self.set_pwm(read_time, 0.)
+            if temp > self.peak:
+                self.peak = temp
+                self.peak_time = read_time
+
+    def check_busy(self, eventtime, smoothed_temp, target_temp):
+        if self.heating or len(self.peaks) < 12:
+            return True
+        return False
+
+    # Analysis
+    def check_peaks(self):
+        self.peaks.append((self.peak, self.peak_time))
+        if self.heating:
+            self.peak = 9999999.
+        else:
+            self.peak = -9999999.
+        if len(self.peaks) < 4:
+            return
+        self.calc_pid(len(self.peaks) - 1)
+
+    def calc_pid(self, pos):
+        temp_diff = self.peaks[pos][0] - self.peaks[pos - 1][0]
+        time_diff = self.peaks[pos][1] - self.peaks[pos - 2][1]
+        # Use Astrom-Hagglund method to estimate Ku and Tu
+        amplitude = .5 * abs(temp_diff)
+        Ku = 4. * self.heater_max_power / (math.pi * amplitude)
+        Tu = time_diff
+        # Use Ziegler-Nichols method to generate PID parameters
+        Ti = 0.5 * Tu
+        Td = 0.125 * Tu
+        Kp = 0.6 * Ku * heaters.PID_PARAM_BASE
+        Ki = Kp / Ti
+        Kd = Kp * Td
+        logging.info("Autotune: raw=%f/%f Ku=%f Tu=%f  Kp=%f Ki=%f Kd=%f",
+                     temp_diff, self.heater_max_power, Ku, Tu, Kp, Ki, Kd)
+        return Kp, Ki, Kd
+
+    def calc_final_pid(self):
+        cycle_times = [(self.peaks[pos][1] - self.peaks[pos - 2][1], pos)
+                       for pos in range(4, len(self.peaks))]
+        midpoint_pos = sorted(cycle_times)[len(cycle_times) // 2][1]
+        return self.calc_pid(midpoint_pos)
+
+    # Offline analysis helper
+    def write_file(self, filename):
+        pwm = ["pwm: %.3f %.3f" % (time, value)
+               for time, value in self.pwm_samples]
+        out = ["%.3f %.3f" % (time, temp) for time, temp in self.temp_samples]
+        f = open(filename, "w")
+        f.write('\n'.join(pwm + out))
+        f.close()
+
+
+def external_influence(rand=1.0, sinus=5):
+    return random.uniform(-rand, rand)
 
 
 class heater:
-    def __init__(self, start=25.0, cool_factor=1.0, kpd = 20.0):
-        self.T = start
-        self._target = start
-        self.cool_factor = cool_factor
-        self.kpd = kpd/100
-        self.internal =[]
-        for x in range(100):
-            self.internal.append(0.)
-
+    def __init__(self, low=0.0, hight=100.0, mass = 10):
+        self.low = low
+        self.hight = hight
+        self.T = low
+        self.mass = mass
+        self.timeback = [0 for _ in range(mass)]
     def PWM(self, pwm=0):
-        del(self.internal[0])
-        self.internal.append(pwm*self.kpd * 0.01)
-        tt = 0
-        for x in range(100):
-            tt+= (x/100000)* self.internal[x]
-        self.T = self._target + (self.T - self._target)*self.cool_factor + tt
+        back = sum(self.timeback)/len(self.timeback)
+        d = pwm - self.T
+        self.T += (d/self.mass + back)/2
+        del(self.timeback[0])
+        self.timeback.append(pwm)
+    set_pwm = PWM
+
 
 
 def main():
     my_heater = heater()
     targetT = 35.0
-    P = 10.0
-    I = 1.0
-    D = 1.0
+    P = .07
+    I = 0.2
+    D = 1.
     pid = PID(P, I, D, current_time=0)
     pid.SetPoint = targetT
     pid.setSampleTime(1)
@@ -170,16 +263,17 @@ def main():
     current_time = 0
     print("Step, Target C, Current C, P, I, D, PWM")
 
-
-    for x in external_influence():
-        current_time+=1
-        curent_temperature = my_heater.T + x
+    while current_time < 1000:
+        current_time += 1
+        curent_temperature = my_heater.T
         pid.update(curent_temperature, current_time=current_time)
         targetPwm = pid.output
         targetPwm = max(min(int(targetPwm), 100), 0)
-        my_heater.PWM(targetPwm)
-        print("%5i,  %.1f, %.1f, %+7.1f, %+7.1f, %+7.1f, %3i" % (current_time, targetT, curent_temperature, pid.PTerm, pid.ITerm, pid.DTerm, targetPwm) )
+        my_heater.set_pwm(targetPwm)
+        print("%5i,  %.1f, %.1f, %+7.1f, %+7.1f, %+7.1f, %3i" % \
+              (current_time, targetT, curent_temperature, pid.PTerm, pid.ITerm, pid.DTerm, targetPwm))
 
 
-if __name__ =='__main__':
+
+if __name__ == '__main__':
     main()
