@@ -131,38 +131,30 @@ class PID:
         self.sample_time = sample_time
 
 
-def external_influence(rand = 1.0, sinus = 5):
-    i = 1000
-    while i>0:
-        i-=1
-        yield random.uniform(-rand, rand)
+def external_influence(rand=1.0, sinus=5):
+    return random.uniform(-rand, rand)
 
 
 class heater:
-    def __init__(self, start=25.0, cool_factor=1.0, kpd = 20.0):
-        self.T = start
-        self._target = start
-        self.cool_factor = cool_factor
-        self.kpd = kpd/100
-        self.internal =[]
-        for x in range(100):
-            self.internal.append(0.)
-
+    def __init__(self, low=0.0, hight=100.0, mass = 10):
+        self.low = low
+        self.hight = hight
+        self.T = low
+        self.mass = mass
+        self.timeback = [0 for _ in range(mass)]
     def PWM(self, pwm=0):
-        del(self.internal[0])
-        self.internal.append(pwm*self.kpd * 0.01)
-        tt = 0
-        for x in range(100):
-            tt+= (x/100000)* self.internal[x]
-        self.T = self._target + (self.T - self._target)*self.cool_factor + tt
-
+        back = sum(self.timeback)/len(self.timeback)
+        d = pwm - self.T
+        self.T += (d/self.mass + back)/2
+        del(self.timeback[0])
+        self.timeback.append(pwm)
 
 def main():
     my_heater = heater()
     targetT = 35.0
-    P = 10.0
-    I = 1.0
-    D = 1.0
+    P = 1.0
+    I = 500.0
+    D = 10.0
     pid = PID(P, I, D, current_time=0)
     pid.SetPoint = targetT
     pid.setSampleTime(1)
@@ -170,16 +162,16 @@ def main():
     current_time = 0
     print("Step, Target C, Current C, P, I, D, PWM")
 
-
-    for x in external_influence():
-        current_time+=1
-        curent_temperature = my_heater.T + x
+    while current_time < 1000:
+        current_time += 1
+        curent_temperature = my_heater.T
         pid.update(curent_temperature, current_time=current_time)
         targetPwm = pid.output
         targetPwm = max(min(int(targetPwm), 100), 0)
         my_heater.PWM(targetPwm)
-        print("%5i,  %.1f, %.1f, %+7.1f, %+7.1f, %+7.1f, %3i" % (current_time, targetT, curent_temperature, pid.PTerm, pid.ITerm, pid.DTerm, targetPwm) )
+        print("%5i,  %.1f, %.1f, %+7.1f, %+7.1f, %+7.1f, %3i" % \
+              (current_time, targetT, curent_temperature, pid.PTerm, pid.ITerm, pid.DTerm, targetPwm))
 
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     main()
