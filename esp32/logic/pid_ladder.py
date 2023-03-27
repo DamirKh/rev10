@@ -13,11 +13,11 @@ class PID:
             Ki=0.0,
             Kd=0.0,
             setpoint=0,
-            sample_time=0.1,
+            # sample_time=None,
             output_limits=(0.0, 100.0),
             auto_mode=False,
             proportional_on_measurement=False,
-            differetial_on_measurement=True,
+            differetial_on_measurement=False,
     ):
         self._pid_name = pid_name
         self._set_point = setpoint
@@ -39,13 +39,13 @@ class PID:
             print('Kp={}  Ki={}  Kd={}'.format(_Kp, _Ki, _Kd))
             self.simple_pid = simple_pid(
                 Kp=_Kp, Ki=_Ki, Kd=_Kd,
-                sample_time=sample_time,
+                sample_time=None,
                 output_limits=output_limits,
                 auto_mode=auto_mode,
                 proportional_on_measurement=proportional_on_measurement,
                 differetial_on_measurement=differetial_on_measurement,
             )
-            self.simple_pid.time_fn = time.ticks_us
+            # self.simple_pid.time_fn = time.ticks_us
 
     def save_config(self):
         config = ConfigParser()

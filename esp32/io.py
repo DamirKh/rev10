@@ -17,7 +17,7 @@ G.DEVICES['LED1'] = Pin(23, Pin.OUT)
 
 
 # Dallas 18B20 temperature sensor
-G.DEVICES['DALLAS'] = dallas.Dallas(4, poll_period=10_000)
+G.DEVICES['DALLAS'] = dallas.Dallas(4, poll_period=1_000)
 
 
 print(G.DEVICES)

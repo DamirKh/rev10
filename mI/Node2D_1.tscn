@@ -82,29 +82,29 @@ script = ExtResource( 13 )
 Tag = "TEMPERATURE"
 
 [node name="mI_Level2" type="ProgressBar" parent="mI_Organizer"]
-margin_left = -6.0
-margin_top = 387.0
-margin_right = 432.0
-margin_bottom = 443.0
+margin_left = -1.90441
+margin_top = 461.429
+margin_right = 436.096
+margin_bottom = 517.429
 theme = ExtResource( 11 )
 percent_visible = false
 script = ExtResource( 10 )
 
 [node name="mI_Label" type="Label" parent="mI_Organizer"]
-margin_left = 58.0
-margin_top = 401.333
-margin_right = 475.0
-margin_bottom = 457.333
+margin_left = 76.667
+margin_top = 477.143
+margin_right = 493.667
+margin_bottom = 533.143
 theme = ExtResource( 3 )
 text = "Temperature = %s"
 script = ExtResource( 9 )
 Tag = "TEMPERATURE"
 
 [node name="mI_Label" type="Label" parent="."]
-margin_left = 157.143
-margin_top = 475.714
-margin_right = 283.143
-margin_bottom = 531.714
+margin_left = 481.429
+margin_top = 290.0
+margin_right = 607.429
+margin_bottom = 346.0
 theme = ExtResource( 3 )
 text = "%s"
 align = 2
@@ -133,23 +133,81 @@ script = ExtResource( 9 )
 
 [node name="mI_TextureButton" parent="mI_Organizer4/mI_Label" instance=ExtResource( 6 )]
 margin_left = 1.52588e-05
-margin_top = 88.5714
-margin_bottom = 182.571
+margin_top = 67.1429
+margin_bottom = 161.143
 
 [node name="mI_TextureButton2" parent="mI_Organizer4/mI_Label" instance=ExtResource( 14 )]
 margin_left = 125.714
-margin_top = 88.5714
+margin_top = 70.0001
 margin_right = 218.714
-margin_bottom = 182.571
+margin_bottom = 164.0
 
 [node name="mI_Level" type="ProgressBar" parent="mI_Organizer4/mI_Label"]
 margin_left = -14.2857
-margin_top = 182.857
+margin_top = 241.428
 margin_right = 404.714
-margin_bottom = 214.857
+margin_bottom = 273.428
 script = ExtResource( 10 )
 Tag = "POWER"
 HiHiSetpoint = 90.0
 HiSetpoint = 80.0
 LoSetpoint = 20.0
 LoLoSetpoint = 10.0
+
+[node name="mI_Level2" type="ProgressBar" parent="mI_Organizer4/mI_Label"]
+margin_left = -14.2859
+margin_top = 280.0
+margin_right = 404.714
+margin_bottom = 312.0
+min_value = -250.0
+max_value = 250.0
+step = 1.0
+percent_visible = false
+script = ExtResource( 10 )
+Tag = "P"
+HiHiSetpoint = 200.0
+HiSetpoint = 150.0
+LoSetpoint = -150.0
+LoLoSetpoint = -200.0
+
+[node name="mI_Level3" type="ProgressBar" parent="mI_Organizer4/mI_Label"]
+margin_left = -14.2859
+margin_top = 317.143
+margin_right = 404.714
+margin_bottom = 349.143
+min_value = -250.0
+max_value = 250.0
+step = 1.0
+percent_visible = false
+script = ExtResource( 10 )
+Tag = "I"
+HiHiSetpoint = 200.0
+HiSetpoint = 150.0
+LoSetpoint = -150.0
+LoLoSetpoint = -200.0
+
+[node name="mI_Level4" type="ProgressBar" parent="mI_Organizer4/mI_Label"]
+margin_left = -14.2859
+margin_top = 354.285
+margin_right = 404.714
+margin_bottom = 386.285
+min_value = -250.0
+max_value = 250.0
+step = 1.0
+percent_visible = false
+script = ExtResource( 10 )
+Tag = "D"
+HiHiSetpoint = 200.0
+HiSetpoint = 150.0
+LoSetpoint = -150.0
+LoLoSetpoint = -200.0
+
+[node name="HSlider" type="HSlider" parent="mI_Organizer4/mI_Label"]
+margin_left = -19.0
+margin_top = -171.0
+margin_right = 420.0
+margin_bottom = -128.0
+rect_scale = Vector2( 1, 2.48571 )
+value = 20.0
+tick_count = 11
+ticks_on_borders = true

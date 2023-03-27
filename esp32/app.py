@@ -1,4 +1,4 @@
-PERIOD = 50  # ms
+PERIOD = 10  # ms
 
 import G
 from logic import Timer
@@ -23,6 +23,7 @@ pid_t.save_config()
 T1 = Timer(8_000)
 WorkingTimeCounter = Counter()
 OneSecondSpark = Spark(1000)
+Q_SPARK = Spark(250)
 ONS = OneShoot()
 
 # ############################# reversibles
@@ -44,15 +45,16 @@ auto_up = tag.DiscreteOutputTag('AUTO')
 temp_sp = tag.RealInputTag('TEMP_SP')
 power = tag.RealOutputTag('POWER')
 power_manual = tag.RealInputTag('POWER_MANUAL')
+PID_c = tag.RealOutputTag('P'), tag.RealOutputTag('I'), tag.RealOutputTag('D')
 
 
 def onstart():
     print('Start application')
     # Start code below
-    OneSecondSpark.EN = True
+    Q_SPARK.EN = OneSecondSpark.EN = True
     TEMPERATURE.VALUE = DALLAS.VALUE
-    power_manual.trigger(10)
-    pid_t.SP = 50.0
+    power_manual.trigger(0.0)
+    pid_t.SP = 26.0
 
 
 def normal():
@@ -74,11 +76,11 @@ def normal():
     led_on.VALUE = LED1()
 
     pid_t.AUTO = auto.VALUE
-    pid_t.PV = pid_t.CV
+    pid_t.PV = DALLAS.VALUE
     auto_up.VALUE = pid_t.AUTO
-    if s1000:
+    if Q_SPARK.SPARK:
         power.VALUE = pid_t.CV
-        #print(str(pid_t.simple_pid))
+        PID_c[0].VALUE, PID_c[1].VALUE, PID_c[2].VALUE = pid_t.simple_pid.components
     pid_t.CV = power_manual.VALUE
 
 
