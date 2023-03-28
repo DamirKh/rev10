@@ -19,6 +19,7 @@ position = Vector2( -41, 6 )
 scale = Vector2( 0.7, 0.7 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 354.286, 540.714 )
 scale = Vector2( 1.35053, 1.32653 )
 texture = ExtResource( 1 )
@@ -69,7 +70,7 @@ margin_top = 254.0
 margin_right = 445.0
 margin_bottom = 366.0
 theme = ExtResource( 3 )
-text = "Fan
+text = "LED
 is
 %s"
 align = 1

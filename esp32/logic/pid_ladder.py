@@ -6,6 +6,8 @@ from configparser.ConfigParser import ConfigParser
 
 
 class PID:
+    """ Work in progress!
+    Do not use!"""
     def __init__(
             self,
             pid_name,
