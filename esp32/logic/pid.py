@@ -93,6 +93,7 @@ class PID(object):
         :param dt: If set, uses this value for timestep instead of real time. This can be used in
             simulations when simulation time is different from real time.
         """
+        print('** Call PID')
         if not self.auto_mode:
             return self._last_output
 
@@ -131,6 +132,7 @@ class PID(object):
             self._derivative = -self.Kd * d_input / dt
         else:
             self._derivative = self.Kd * d_error / dt
+            print('_derivative={}'.format(self._derivative))
 
         # Compute final output
         output = self._proportional + self._integral + self._derivative

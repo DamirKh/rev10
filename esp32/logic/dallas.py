@@ -28,7 +28,11 @@ class Dallas:
                     continue
 
                 for c in range(len(self._chips)):
-                    self._values[c] = self._ds.read_temp(self._chips[c])
+                    try:
+                        self._values[c] = self._ds.read_temp(self._chips[c])
+                    except:
+                        self._values[c] = float('inf')
+                        pass
                     #print(self._values)
                     await asyncio.sleep(0)
 

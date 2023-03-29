@@ -13,11 +13,11 @@ class PID:
             Ki=0.0,
             Kd=0.0,
             setpoint=0,
-            # sample_time=None,
+            #sample_time=None,
             output_limits=(0.0, 100.0),
             auto_mode=False,
             proportional_on_measurement=False,
-            differetial_on_measurement=False,
+            differetial_on_measurement=True,
     ):
         self._pid_name = pid_name
         self._set_point = setpoint
@@ -94,7 +94,7 @@ class PID:
     def CV(self):
         """Control Variable"""
         if self._auto:
-            self._cv = self.simple_pid(self._pv)
+            self._cv = self.simple_pid(self._pv, dt=1)
             #print('Mode AUTO. CV = {}'.format(self._cv))
             return self._cv
         else:
