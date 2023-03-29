@@ -147,13 +147,11 @@ margin_left = -14.2857
 margin_top = 241.428
 margin_right = 404.714
 margin_bottom = 273.428
-max_value = 1024.0
 script = ExtResource( 10 )
 Tag = "POWER"
-HiHiSetpoint = 900.0
-HiSetpoint = 800.0
-LoSetpoint = 200.0
-LoLoSetpoint = 100.0
+HiHiSetpoint = 95.0
+HiSetpoint = 90.0
+LoSetpoint = 10.0
 
 [node name="mI_Level2" type="ProgressBar" parent="mI_Organizer4/mI_Label"]
 margin_left = -14.2859

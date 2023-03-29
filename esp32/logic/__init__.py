@@ -5,3 +5,4 @@ from .spark import Spark
 from .revert import Revert
 from .one_shoot import OneShoot
 from .pid_ladder import PID
+from .HD_PWM import HeavyDutyPWM

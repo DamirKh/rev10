@@ -3,7 +3,7 @@ this file defines the hardware features of the project. Relays, buttons, LEDs, A
 """
 import G
 from machine import Pin, PWM
-from logic import switch_ladder, dallas
+from logic import switch_ladder, dallas, HeavyDutyPWM
 #from neopixel import NeoPixel
 
 # Switches
@@ -14,9 +14,11 @@ G.DEVICES['SW_OFF'] = switch_ladder.Switch_ladder(Pin(19, Pin.IN), inverted=True
 #G.DEVICES['LED1'] = Pin(23, Pin.OUT)
 
 #PWM output
-pwm0 = PWM(Pin(23))         # create PWM object from a pin
-pwm0.freq(1000)            # set PWM frequency from 1Hz to 40MHz
-G.DEVICES['PWM0'] = pwm0
+# pwm0 = PWM(Pin(23), freq=10, duty=0)         # create PWM object from a pin
+# G.DEVICES['PWM0'] = pwm0
+
+big_heater = HeavyDutyPWM(23, period=1)
+G.DEVICES['HEATER'] = big_heater
 
 
 # Onboard NeoPixel LED

@@ -15,7 +15,7 @@ from uasyncio import sleep_ms as PAUSE
 
 
 # ############################## PIDs
-pid_t = PID('pid_t', Kp=1.0, Ki=0.0, Kd=0.0, output_limits=(0, 1023), proportional_on_measurement=False, differetial_on_measurement=False)
+pid_t = PID('pid_t', Kp=1.0, Ki=0.0, Kd=0.0, output_limits=(0, 100), proportional_on_measurement=False, differetial_on_measurement=False)
 pid_t.save_config()
 
 # ##############################  timers, counters, sparks
@@ -34,7 +34,7 @@ SW_ON = G.DEVICES['SW_ON']
 SW_OFF = G.DEVICES['SW_OFF']
 #LED1 = G.DEVICES['LED1']
 DALLAS = G.DEVICES['DALLAS']
-HEATER = G.DEVICES['PWM0']
+HEATER = G.DEVICES['HEATER']
 
 # ############################## TAGS
 on_command = tag.DiscreteInputTag('SW1')
@@ -75,13 +75,13 @@ def normal():
     #LED1(T1.TT or on_command.VALUE)
     #led_on.VALUE = LED1()
 
-    auto_up.VALUE = pid_t.AUTO = auto.VALUE
+    HEATER.EN = auto_up.VALUE = pid_t.AUTO = auto.VALUE
 
     if Q_SPARK.SPARK:
         TEMPERATURE.VALUE = DALLAS.VALUE
         pid_t.PV = DALLAS.VALUE
-        power.VALUE = pid_t.CV
-        HEATER.duty(int(power.VALUE))
+        HEATER.VALUE = power.VALUE = pid_t.CV
+        # HEATER.duty (int(power.VALUE))
         PID_c[0].VALUE, PID_c[1].VALUE, PID_c[2].VALUE = pid_t.simple_pid.components
     pid_t.CV = power_manual.VALUE
 
