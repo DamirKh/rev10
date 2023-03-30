@@ -19,17 +19,16 @@ func _ready():
 
 	var ancestor = P # self.get_parent()
 	
-	if not ancestor.Tag:  # Looking for Tag property in ancestor up
-		while ancestor:
-			if ancestor.Tag:  #TODO
-				Tag = ancestor.Tag
-				P.Tag = Tag
-				break
-			else:
-				#  go up on tree
-				ancestor = ancestor.get_parent()
-	else:
-		Tag = P.Tag
+	while ancestor:
+		if ancestor.get('Tag'):  #DONE
+			Tag = ancestor.Tag
+			P.Tag = Tag
+			break
+		else:
+			#  go up on tree
+			ancestor = ancestor.get_parent()
+	if not Tag:
+		printerr("Tag was not found for node {}".format([ self.get_parent(), ], '{}'))
 
 
 func PhoneCall(phone_message):

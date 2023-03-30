@@ -6,6 +6,9 @@
 
 [node name="mI_Organizer5" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Slider+accept"
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 210.5, 53.25 )
@@ -24,7 +27,7 @@ margin_top = 1.0
 margin_right = 413.0
 margin_bottom = 33.0
 theme = ExtResource( 2 )
-text = "Temperature setpoint"
+text = "Setpoint"
 align = 1
 
 [node name="Button" type="Button" parent="."]
@@ -32,3 +35,20 @@ margin_left = 312.0
 margin_top = 40.0
 margin_right = 384.0
 margin_bottom = 81.0
+theme = ExtResource( 2 )
+text = "OK"
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+margin_left = 80.0
+margin_top = -24.0
+margin_right = 216.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+valign = 1
