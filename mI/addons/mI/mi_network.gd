@@ -14,6 +14,8 @@ var _client = WebSocketClient.new()
 
 var ReconnectTimer := Timer.new()
 
+var ControlsDisabled = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,10 +68,13 @@ func _on_ReconnectTimer_timeout():
 
 func disable_all_controls():
 	# comment next line for Local debug
-	emit_signal("Directive", '*', 'DIS')
+	if not ControlsDisabled:
+		emit_signal("Directive", '*', 'DIS')
+		ControlsDisabled = true
 	pass
 func enable_all_controls():
 	emit_signal("Directive", '*', 'EN')
+	ControlsDisabled = false
 
 func _process(_delta):
 	# Call this in _process or _physics_process. Data transfer, and signals
