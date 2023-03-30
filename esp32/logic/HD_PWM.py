@@ -2,7 +2,7 @@ from machine import Pin
 import uasyncio as asyncio
 
 
-def _clamp(value, limits):
+def _clamp(value, limits):  # TODO move to library
     lower, upper = limits
     if value is None:
         return None
