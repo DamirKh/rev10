@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://composites/images/BackImage.svg" type="Texture" id=1]
 [ext_resource path="res://composites/Indications/Lamp_ON_OFF.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Top_Connection_Control/Navigation_Control.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=13]
 [ext_resource path="res://composites/buttons/Button_OFF.tscn" type="PackedScene" id=14]
+[ext_resource path="res://composites/buttons/Button_AUTO.tscn" type="PackedScene" id=15]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( -41, 6 )
@@ -37,21 +38,31 @@ position = Vector2( 186.762, -420.667 )
 script = ExtResource( 13 )
 Tag = "SW1"
 
-[node name="mI_TextureButton" parent="mI_Organizer2" instance=ExtResource( 6 )]
+[node name="ON" parent="mI_Organizer2" instance=ExtResource( 6 )]
 self_modulate = Color( 0.0392157, 0.803922, 0.215686, 1 )
-margin_left = -3.904
-margin_top = 484.524
-margin_right = 89.096
-margin_bottom = 578.524
-rect_scale = Vector2( 2, 2 )
+margin_left = -49.6191
+margin_top = 484.953
+margin_right = 43.3809
+margin_bottom = 578.953
+rect_scale = Vector2( 1.5, 1.5 )
 
-[node name="mI_TextureButton2" parent="mI_Organizer2" instance=ExtResource( 14 )]
+[node name="OFF" parent="mI_Organizer2" instance=ExtResource( 14 )]
 self_modulate = Color( 0.94902, 0.423529, 0.423529, 1 )
-margin_left = 181.81
-margin_top = 483.524
-margin_right = 274.81
-margin_bottom = 577.524
-rect_scale = Vector2( 2, 2 )
+margin_left = 267.524
+margin_top = 484.953
+margin_right = 360.524
+margin_bottom = 578.953
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="AUTO" parent="mI_Organizer2" instance=ExtResource( 15 )]
+self_modulate = Color( 0.968627, 0.976471, 0.2, 1 )
+margin_left = 131.809
+margin_top = 500.667
+margin_right = 224.809
+margin_bottom = 604.667
+rect_rotation = 30.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 41.9048, 52.381 )
 
 [node name="mI_Indicator2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 167.143, 311.429 )

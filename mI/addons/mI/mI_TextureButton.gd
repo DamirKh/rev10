@@ -17,7 +17,7 @@ func _ready():
 	add_child(point)
 	self.rect_min_size = self.rect_size
 	connect("pressed", self, "clicked")
-	self.hint_tooltip = Tag
+	self.hint_tooltip = Tag+' '+Command
 
 	T.wait_time = Release_focus
 	T.one_shot = true

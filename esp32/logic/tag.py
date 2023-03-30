@@ -88,7 +88,7 @@ class RealInputTag(BaseInputTag):
         v = max(self._low, v)
         v = min(self._high, v)
         self._value = v
-        #print('RealInputTag {}. Value = {}'.format(self._name, self._value))
+        # print('RealInputTag {}. Value = {}'.format(self._name, self._value))
 
 
 class IntOutputTag(BaseOutputTag):
@@ -123,3 +123,12 @@ class IntInputTag(BaseInputTag):
             # here should be an error message to hmi
             return
         self._value = v
+
+
+class TextInputTag(BaseInputTag):
+    def __init__(self, name, init_value="OFF"):
+        BaseInputTag.__init__(self, name)
+        self._value = init_value
+
+    def trigger(self, val: str):
+        self._value = val

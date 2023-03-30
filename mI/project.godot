@@ -22,6 +22,8 @@ _global_script_class_icons={
 
 config/name="mI"
 run/main_scene="res://Node2D_1.tscn"
+boot_splash/image="res://icon.png"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
