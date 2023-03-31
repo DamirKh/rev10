@@ -1,23 +1,12 @@
 from machine import Pin
 import uasyncio as asyncio
-
-
-def _clamp(value, limits):  # TODO move to library
-    lower, upper = limits
-    if value is None:
-        return None
-    elif (upper is not None) and (value > upper):
-        return upper
-    elif (lower is not None) and (value < lower):
-        return lower
-    return value
-
+from helpers import clamp
 
 class HeavyDutyPWM:
     """Software PWM"""
 
     def __init__(self, pin_number, period=10, invert=False, limits=(0, 100)):
-        """:param period seconds
+        """:param period (seconds)
         :param invert if True pin initiated HIGH"""
         assert type(invert) is type(True), 'What?!'
         assert limits == (0, 100), 'Not implemented custom range!'
@@ -55,7 +44,7 @@ class HeavyDutyPWM:
 
     @VALUE.setter
     def VALUE(self, v):
-        self._value = float(_clamp(v, self.limits))
+        self._value = float(clamp(v, self.limits))
 
     @property
     def EN(self):

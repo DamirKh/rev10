@@ -4,7 +4,7 @@
 # Released under the MIT License (MIT) - see LICENSE file
 
 import uasyncio as asyncio
-import io
+import hw
 
 MP_STREAM_POLL_RD = const(1)
 MP_STREAM_POLL = const(3)

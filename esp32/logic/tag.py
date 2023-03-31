@@ -1,4 +1,4 @@
-import G
+import G as _G
 
 
 class BaseInputTag:
@@ -7,7 +7,7 @@ class BaseInputTag:
     def __init__(self, name: str):
         self._name = name
         self._value = None
-        G.INPUT_TAG[name] = self
+        _G.INPUT_TAG[name] = self
 
     def trigger(self, val: str):
         """Override me"""
@@ -32,7 +32,7 @@ class BaseOutputTag:
     def __init__(self, name: str):
         self._name = name
         self._value = None
-        G.OUTPUT_TAG[name] = self
+        _G.OUTPUT_TAG[name] = self
 
     def trigger(self):
         """Override me"""
@@ -42,7 +42,7 @@ class BaseOutputTag:
 class DiscreteOutputTag(BaseOutputTag):
 
     def trigger(self):
-        G.OUT_QUEUE.put_nowait(self._name + ' ' + ('ON' if self._value else 'OFF'))
+        _G.OUT_QUEUE.put_nowait(self._name + ' ' + ('ON' if self._value else 'OFF'))
 
     @property
     def VALUE(self):
@@ -61,7 +61,7 @@ class RealOutputTag(BaseOutputTag):
         self._fmt = fmt
 
     def trigger(self):
-        G.OUT_QUEUE.put_nowait(self._name + self._fmt.format(self._value))
+        _G.OUT_QUEUE.put_nowait(self._name + self._fmt.format(self._value))
 
     @property
     def VALUE(self):
@@ -97,7 +97,7 @@ class IntOutputTag(BaseOutputTag):
         self._fmt = fmt
 
     def trigger(self):
-        G.OUT_QUEUE.put_nowait(self._name + self._fmt.format(self._value))
+        _G.OUT_QUEUE.put_nowait(self._name + self._fmt.format(self._value))
 
     @property
     def VALUE(self):

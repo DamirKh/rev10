@@ -6,7 +6,7 @@ from ws_server import add_client, dispatcherDOWN, dispatcherUP
 from websockets import server
 import G
 from logic import test
-import io
+import hw
 import app
 
 app.onstart()
