@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=1]
+[ext_resource path="res://composites/debug/Label_log.gd" type="Script" id=2]
+
+[node name="mI_Organizer" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+margin_right = 392.0
+margin_bottom = 462.0
+border_width = 2.2
+
+[node name="Panel" type="Panel" parent="ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="ReferenceRect/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ReferenceRect/Panel/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="ReferenceRect/Panel/Control/ScrollContainer"]
+margin_right = 392.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+autowrap = true
+script = ExtResource( 2 )

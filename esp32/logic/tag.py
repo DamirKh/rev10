@@ -132,3 +132,22 @@ class TextInputTag(BaseInputTag):
 
     def trigger(self, val: str):
         self._value = val
+
+
+class TextOutputTag(BaseOutputTag):
+    def __init__(self, name, init_text=""):
+        BaseInputTag.__init__(self, name)
+        self._text = init_text
+
+    def trigger(self, val=None):
+        if val:
+            self._text = val
+        _G.OUT_QUEUE.put_nowait(self._name + ' ' + self._text)
+
+    @property
+    def VALUE(self):
+        return self._text
+
+    @VALUE.setter
+    def VALUE(self, txt):
+        self._text = txt

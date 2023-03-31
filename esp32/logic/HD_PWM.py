@@ -1,6 +1,6 @@
 from machine import Pin
 import uasyncio as asyncio
-from helpers import clamp
+from .helpers import clamp
 
 class HeavyDutyPWM:
     """Software PWM"""

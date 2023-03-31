@@ -41,6 +41,7 @@ temp_sp = tag.RealInputTag('TEMP_SP')
 power = tag.RealOutputTag('POWER')
 power_manual = tag.RealInputTag('POWER_MANUAL')
 PID_c = tag.RealOutputTag('P'), tag.RealOutputTag('I'), tag.RealOutputTag('D')
+logger = tag.TextOutputTag('LOG')
 
 
 def onstart():
@@ -58,7 +59,8 @@ def normal():
     T1.EN = (hw.SW_ON.ON or T1.TT) and not hw.SW_OFF.ON
     ONS.EN = on_command.VALUE
     if ONS:
-        print('1')
+        logger.VALUE = 'Logging test long string. Very long string. Very-very-very loooooooooooooooooooooooooooooooooooooooong string. И русские буквы заодно проверим'
+        logger.trigger()
 
     WorkingTimeCounter.UP = s1000 and pid_t.AUTO
     # print(WorkingTimeCounter.ACC)
@@ -69,6 +71,7 @@ def normal():
     # led_on.VALUE = LED1()
 
     hw.HEATER.EN = auto_up.VALUE = pid_t.AUTO = auto.VALUE
+    logger.VALUE = "Power = {}".format(hw.HEATER.VALUE)
     pid_t.CV = power_manual.VALUE
 
     if Q_SPARK.SPARK:
@@ -77,6 +80,7 @@ def normal():
         hw.HEATER.VALUE = power.VALUE = pid_t.CV
         # HEATER.duty (int(power.VALUE))
         PID_c[0].VALUE, PID_c[1].VALUE, PID_c[2].VALUE = pid_t.simple_pid.components
+        logger.trigger()
 
 
 def onstop():

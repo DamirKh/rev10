@@ -29,6 +29,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Top_Connection_Control/Global.gd"
+GlobalLogger="*res://addons/mI/Global_Logger.gd"
 MiNetwork="*res://addons/mI/mi_network.gd"
 
 [display]
