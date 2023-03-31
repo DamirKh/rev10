@@ -13,7 +13,7 @@ class PID:
             Ki=0.0,
             Kd=0.0,
             setpoint=0,
-            #sample_time=None,
+            # sample_time=None,
             output_limits=(0.0, 100.0),
             auto_mode=False,
             proportional_on_measurement=False,
@@ -91,16 +91,20 @@ class PID:
         self._pv = float(value)
 
     @property
+    def UPDATE(self):
+        return self._pv
+
+    @UPDATE.setter
+    def UPDATE(self, bit):
+        """Set UPDATE to True periodically for PID calculate new Control value"""
+        if bit and self._auto:
+            self._cv = self.simple_pid(self._pv, dt=1)
+            # print('Mode AUTO. CV = {}'.format(self._cv))
+
+    @property
     def CV(self):
         """Control Variable"""
-        if self._auto:
-            self._cv = self.simple_pid(self._pv, dt=1)
-            #print('Mode AUTO. CV = {}'.format(self._cv))
-            return self._cv
-        else:
-            #print('Mode MANUAL. CV = {}'.format(self._cv))
-            return self._cv
-
+        return self._cv
 
     @CV.setter
     def CV(self, value):
@@ -108,8 +112,7 @@ class PID:
             return
         else:
             self._cv = value
-            #print('!! mode MANUAL  set CV={}'.format(self._cv))
-
+            # print('!! mode MANUAL  set CV={}'.format(self._cv))
 
     @property
     def AUTO(self):
@@ -124,7 +127,6 @@ class PID:
             self.simple_pid.set_auto_mode(True, last_output=self._cv)
         if not a and not self._auto:  # no change
             return
-        if not a and self._auto: # switch to manual mode
+        if not a and self._auto:  # switch to manual mode
             self._auto = False
             self.simple_pid.auto_mode = False
-
