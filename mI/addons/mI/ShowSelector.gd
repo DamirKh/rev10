@@ -21,8 +21,7 @@ func Radio(Value):
 	print_debug('Selector got '+ Value)
 	for node in Variants:
 		node.visible = node.name.to_upper() == Value
-			
-#		node.visible = false
+
 
 func Directive(Value):
 	if Value == 'DIS':

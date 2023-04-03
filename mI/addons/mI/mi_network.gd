@@ -4,9 +4,9 @@ signal Directive(Tag, Value)
 
 var config = ConfigFile.new()
 
-# The URL we will connect to
+# The default URL we will connect to
+# This is an IP adress when ESP32 in AccessPoint mode
 export var websocket_url = "ws://192.168.4.1:7777"
-#export var websocket_url = "ws://192.168.0.110:7777"
 
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
@@ -16,8 +16,6 @@ var ReconnectTimer := Timer.new()
 
 var ControlsDisabled = false
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	disable_all_controls()
 	
@@ -65,13 +63,13 @@ func _on_ReconnectTimer_timeout():
 		print_debug("Connected to "+_client.get_connected_host())
 	pass # Replace with function body.
 
-
 func disable_all_controls():
 	# comment next line for Local debug
 	if not ControlsDisabled:
 		emit_signal("Directive", '*', 'DIS')
 		ControlsDisabled = true
 	pass
+
 func enable_all_controls():
 	emit_signal("Directive", '*', 'EN')
 	ControlsDisabled = false

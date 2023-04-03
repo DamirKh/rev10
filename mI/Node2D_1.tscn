@@ -128,7 +128,7 @@ valign = 1
 script = ExtResource( 9 )
 Tag = "WORK_CNT"
 
-[node name="mI_Organizer3" parent="." instance=ExtResource( 2 )]
+[node name="Lamp_with_Light" parent="." instance=ExtResource( 2 )]
 position = Vector2( 517.143, 311.429 )
 Tag = "LED"
 
