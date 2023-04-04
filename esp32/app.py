@@ -1,6 +1,7 @@
 PERIOD = 10  # ms
 
 import hw
+from logic import ON, OFF
 from logic import Timer
 from logic import Counter
 from logic import Seq
