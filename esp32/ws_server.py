@@ -13,10 +13,10 @@ async def add_client(ws, path):
     try:
         async for in_msg in ws:
             print(in_msg)
-            if in_msg[0]=='.':  #Ping responder
+            if in_msg[0]=='.':  # Ping responder
                 await ws.send(in_msg)
                 continue
-            await G.IN_QUEUE.put(in_msg)
+            await G.IN_QUEUE.put(in_msg)  # down stream message
             #G.OUT_QUEUE.put_nowait(str(G.IN_QUEUE.qsize()))  # TODO COMMENT ME
             # await ws.send(str(G.IN_QUEUE.qsize()))
     except:

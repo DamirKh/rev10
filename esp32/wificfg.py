@@ -1,4 +1,4 @@
-modeAP = False  # set to True for making self access point
+modeAP = True  # set to True for making self access point
 
 AP_Settings = {
     'essid': 'ESP32-AP',
@@ -7,8 +7,8 @@ AP_Settings = {
 }
 
 
-modeSTA = True  # set tot True to connect to existing access point
+modeSTA = False  # set tot True to connect to existing access point
 STA_Settings = {
-    'ssid': 'YourExistingAP',
-    'key': 'password to Your Existing AP'
+    'ssid': 'YourAcceessPointName',
+    'key': 'StrongPassword'
 }
