@@ -60,7 +60,7 @@
 
 После того как получен доступ к REPL, установку MicroPythona-а можно считать завершенной. Установку WebREPL автор не рекомендует.
 
-### Инструмент для работы с Вашим кодом
+### Инструмент для работы с Твоим кодом
 
 В качестве первого инструмента можно выбрать [Thonny Python IDE for beginners](https://thonny.org/).
 
@@ -94,9 +94,67 @@
 
     MPY: soft reboot
     ********************
-           REV 9        
+           REV 10       
     ********************
     Globals loading...
     Connected to access point gft
     Main interface IP address = 192.168.43.144
     Main starting
+
+В зависимости от Твоей точки доступа esp32 может быть доступен по имени (обычно [espressif.local](URL)), но вообще - это отдельная тема для обсуждения.
+
+### Конфигурация перифирии
+
+Модуль esp32 без подключенных перифирийных устройств может, разве что поморгать светодиодом. Это, безусловно, интересно, но быстро надоедает. Чтобы разработать устройство, которое будет выполнять полезные функции к модулю esp32 нужно подключить перифирию для связи с внешним миром. Конфигурация перифирийных устройств хранится в файле **hw.py**. В Твоем случае он выглядит примерно так:
+
+    """
+    this file defines the hardware features of the project. Relays, buttons, LEDs, ADC connected to ESP32
+    """
+    from machine import Pin, PWM
+    from logic import switch_ladder, dallas, HeavyDutyPWM
+    #from neopixel import NeoPixel
+    
+    # Switches
+    SW_ON = switch_ladder.Switch_ladder(Pin(5, Pin.IN), inverted=True)
+    SW_OFF = switch_ladder.Switch_ladder(Pin(6, Pin.IN), inverted=True)
+    
+    # LEDS/RELAYS
+    LED1 = Pin(17, Pin.OUT)
+    
+    #PWM output
+    # pwm0 = PWM(Pin(23), freq=10, duty=0)         # create PWM object from a pin
+    #HEATER = HeavyDutyPWM(7, period=1)
+    
+    # Onboard NeoPixel LED
+    
+    # Dallas 18B20 temperature sensor
+    #DALLAS = dallas.Dallas(4, poll_period=1_000)
+    
+    print(' IO configuration loaded')
+
+Верхние 10 строк содержат описание назначения этого файла и необходимые для работы модули. Комментировать неиспользуемые модули нет необходимости (пока в Твоем устройстве достаточно памяти), а добавлять используемые - обязательно. В данном файле ниже комментария `# Switches` описаны две кнопки, подключенные к входам модуля esp32. Одна, как несложно догадаться, является кнопкой ВКЛ, другая - ВЫКЛ.
+Далее, ниже комментария `# LEDS/RELAYS` описано куда подключен дискретный выход, который может управлять, например реле светодиодом или и тем и другим. При описании своей перифирии давай объектам названия, из которых будет ясно их назначение. (Автор так делает не всегда - можешь переименовать LED1 во что-нибудь по своему вкусу.)
+После того, как опишешь перифирию, запиши изменения в модуль esp32 и нажми CTRL+D. 
+
+        MPY: soft reboot
+    ********************
+           REV 10       
+    ********************
+    Globals loading...
+    Connected to access point gft
+    Main interface IP address = 192.168.43.144
+    Main starting
+     IO configuration loaded
+    Start application
+    UPSTREAM Dispatcher started
+    DOWNSTREAM Dispatcher started
+    dispatherDOWN waiting for message...
+    
+
+Строка `IO configuration loaded` говорит о том, что файл **hw.py**, по крайней мере - загружен.
+
+### Логика приложения
+Настало время описать логику работы устройства и заставить его выполнять задуманную, полезную для Тебя логику. Эта логика описывается в файле `app.py`.  Не забывай синхронизировать его с модулем esp32!
+После того как программа в модуле загружена необходимо привести перифирию в исходное состояние. (Конечно, при разработке схемотехнической части устройства нужно позаботиться о том, чтобы перифирия стартовала в безопасном состоянии). После старта программа выполняет код описанный в функции `onstart()`
+#### onstart
+
