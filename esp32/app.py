@@ -26,10 +26,15 @@ from logic import PID
 def onstart():
     print('Start application')
     # Start code below
-    hw.LED1
+    hw.LED1.STATE = OFF
 
 def normal():
     # Normal executed code below
+    if hw.SW_OFF.ON:
+        hw.LED1.STATE = OFF
+    else:
+        hw.LED1.STATE = hw.LED1.STATE or hw.SW_ON.ON
+
     pass
 
 def onstop():
