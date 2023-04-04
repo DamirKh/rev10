@@ -25,6 +25,7 @@ from logic import PID
 def onstart():
     print('Start application')
     # Start code below
+    hw.LED1
 
 def normal():
     # Normal executed code below
