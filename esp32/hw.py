@@ -18,7 +18,7 @@ SW_OFF = switch_ladder.Switch_ladder(Pin(6, Pin.IN), inverted=True)
 #T_BLACK = TouchPad(Pin(12))
 
 # LEDS/RELAYS
-LED1 = DOut(pin_number=23)
+LED1 = DOut(pin_number=42)
 
 #PWM output
 # pwm0 = PWM(Pin(23), freq=10, duty=0)         # create PWM object from a pin
