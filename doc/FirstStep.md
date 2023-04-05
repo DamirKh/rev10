@@ -4,7 +4,7 @@
 ### Вариант 1.
 Используй git
 
-    damir@damir-VirtualBox:~/rollout$ git clone https://github.com/DamirKh/rev10.git
+    $ git clone https://github.com/DamirKh/rev10.git
     Cloning into 'rev10'...
     remote: Enumerating objects: 659, done.
     remote: Counting objects: 100% (4/4), done.
@@ -12,16 +12,16 @@
     remote: Total 659 (delta 0), reused 1 (delta 0), pack-reused 655
     Receiving objects: 100% (659/659), 91.01 MiB | 2.24 MiB/s, done.
     Resolving deltas: 100% (324/324), done.
-    damir@damir-VirtualBox:~/rollout$ cd rev10
-    damir@damir-VirtualBox:~/rollout/rev10$ git status
+    $ cd rev10
+    $ git status
     On branch master
     Your branch is up to date with 'origin/master'.
     
     nothing to commit, working tree clean
-    damir@damir-VirtualBox:~/rollout/rev10$ git checkout zero
+    $ git checkout zero
     Branch 'zero' set up to track remote branch 'zero' from 'origin'.
     Switched to a new branch 'zero'
-    damir@damir-VirtualBox:~/rollout/rev10$ git status
+    $ git status
     On branch zero
     Your branch is up to date with 'origin/zero'.
     
@@ -34,7 +34,7 @@
 
 ## Что внутри?
 
-    damir@damir-VirtualBox:~/rollout/rev10$ tree -L 1
+    $ tree -L 1
     .
     ├── doc
     ├── esp32
@@ -177,3 +177,29 @@
 #### onstart
 Во-первых, эта функция (с точки зрения Python - это функция) печатает в REPL `Start application`, чтобы во время отладки убедиться что программа стартовала. Во-вторых, в этой функции следует описать операции по приведению перифирии в исходное состояние и, возможно, ее проверки. На предыдущем шаге в файле hw Ты описал подключенный к модулю светодиод (или реле) и дал ему имя. Автор назвал его `LED1`. С точки зрения логики не имеет значения подключен к модулю светодиод или реле - и в том и в другом случае программа рассматривает его как `Discrete Output - DO`.
 При старте программы светодиод должен быть погашен, реле отпущено.
+
+    def onstart():
+        print('Start application')
+        # Start code below
+        hw.LED1.STATE = OFF
+
+Обрати внимание на отступы в начале строки - они важны в Python.
+
+#### normal
+Эта функция выполняется постоянно, пока включено устройство с паузой между сканами, указанной в первой строке
+файла `app.py`. 
+
+    def normal():
+        # Normal executed code below
+        if hw.SW_OFF.ON:
+            hw.LED1.STATE = OFF
+        else:
+            hw.LED1.STATE = hw.LED1.STATE or hw.SW_ON.ON
+        pass
+
+Приведенная программ имеет две ветви: одна исполняется при нажатой кнопке SW_OFF,
+другая - в ином случае. Т.е, по смыслу - при НЕ нажатой.
+Если кнопка SW_OFF нажата - светодиод выключается.
+Если кнопка SW_OFF НЕ нажата - светодиод сохраняет свое текущее состояние или включается, если кнопка SW_ON нажата. 
+Если светодиод включен - его состояние не измениться, пока не будет нажата кнопка SW_OFF.
+

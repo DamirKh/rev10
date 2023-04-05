@@ -8,10 +8,14 @@ from logic import DOut
 from logic import dallas
 from logic import HeavyDutyPWM
 from neopixel import NeoPixel
+from machine import TouchPad
 
 # Switches
 SW_ON = switch_ladder.Switch_ladder(Pin(5, Pin.IN), inverted=True)
 SW_OFF = switch_ladder.Switch_ladder(Pin(6, Pin.IN), inverted=True)
+
+# Touches
+#T_BLACK = TouchPad(Pin(12))
 
 # LEDS/RELAYS
 LED1 = DOut(pin_number=23)
