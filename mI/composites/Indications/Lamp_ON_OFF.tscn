@@ -20,7 +20,6 @@ visible = false
 texture = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="mI_ShowSelector/ON"]
-visible = false
 scale = Vector2( 1.34553, 1.34553 )
 texture = ExtResource( 3 )
 

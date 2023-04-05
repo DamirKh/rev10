@@ -20,4 +20,5 @@ func _on_Button_pressed():
 	config.set_value("ESP", "URL", text)
 	config.save("user://config.ini")
 	
-	Global.goto_scene("res://Node2D_1.tscn")
+	Global.goto_scene("res://main.tscn")
+	#Global.go_back()
