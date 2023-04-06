@@ -1,3 +1,4 @@
+from micropython import const
 from .timer import Timer
 from .counter import Counter
 from .seq import Seq
@@ -8,5 +9,5 @@ from .pid_ladder import PID
 from .HD_PWM import HeavyDutyPWM
 from .discrete import DOut
 
-ON = True
-OFF = False
+ON = const(True)
+OFF = const(False)
