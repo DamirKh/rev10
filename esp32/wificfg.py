@@ -9,6 +9,6 @@ AP_Settings = {
 
 modeSTA = False  # set tot True to connect to existing access point
 STA_Settings = {
-    'ssid': 'YourAcceessPointName',
+    'ssid': 'YourAccessPointName',
     'key': 'StrongPassword'
 }

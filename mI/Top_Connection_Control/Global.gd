@@ -33,4 +33,5 @@ func _deferred_goto_scene(path):
 
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().current_scene = current_scene
+
 	

@@ -20,3 +20,39 @@ class OneShoot:
 
     def __bool__(self):
         return self.EN
+
+
+class JK:
+    def __init__(self, state=False):
+        self._state = state
+        self._j = False
+        self._k = False
+
+    @property
+    def STATE(self):
+        return self._state
+
+    @property
+    def JUMP(self):
+        return self._j
+
+    @JUMP.setter
+    def JUMP(self, bit):
+        if self._j == bit:  # nothing to do
+            return
+        elif bit:  # rising front
+            self._state = True
+        self._j = bit
+
+    @property
+    def KILL(self):
+        return self._k
+
+    @KILL.setter
+    def KILL(self, bit):
+        if self._k == bit:  # nothing to do
+            return
+        elif bit:  # rising front
+            self._state = False
+        self._k = bit
+

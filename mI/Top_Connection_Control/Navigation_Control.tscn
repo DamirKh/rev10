@@ -18,12 +18,15 @@ texture_normal = ExtResource( 3 )
 stretch_mode = 5
 
 [node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 517.5
-margin_right = 901.5
-margin_bottom = 512.0
+margin_left = 325.0
+margin_top = -200.0
+margin_right = 709.0
+margin_bottom = 312.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_rotation = 90.0
 rect_scale = Vector2( 0.15, 0.15 )
+rect_pivot_offset = Vector2( 200, 250 )
 size_flags_stretch_ratio = 2.0
 texture_normal = ExtResource( 2 )
 stretch_mode = 3
