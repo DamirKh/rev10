@@ -1,6 +1,9 @@
 extends Node2D
 export var Tag = ""
 export var TextOnLabel = "Setpoint"
+export var MinValue = 0
+export var MaxValue = 100
+
 
 # Point is a Tag resolver and radio receiver
 var Point = load("res://addons/mI/point.gd")
@@ -10,6 +13,8 @@ var T := Timer.new()
 
 func _ready():
 	add_child(point)
+	$HSlider.min_value = MinValue
+	$HSlider.max_value = MaxValue
 	$Panel.set_visible(false)
 	$HSlider.connect("drag_ended", self, "value_changed" )
 	$HSlider.connect("drag_started", self, "drag_started" )
