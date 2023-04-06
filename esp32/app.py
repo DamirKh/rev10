@@ -18,7 +18,7 @@ from logic import PID
 
 # ##############################  timers, counters, sparks
 T_Light = Timer(preset=5_000)
-Trigger = JK()
+MyLAMP = JK()
 
 
 # ############################# reversibles
@@ -41,11 +41,13 @@ def onstart():
 def normal():
     # Normal executed code below
     T_Light.PRE = LIGHT_TIME.VALUE * 1000
-    Trigger.JUMP = BTN_ON.VALUE or hw.SW_ON.ON
-    Trigger.KILL = BTN_OFF.VALUE or hw.SW_OFF.ON or T_Light.DN
-    T_Light.EN = Trigger.STATE
+    MyLAMP.JUMP = BTN_ON.VALUE or hw.SW_ON.ON
+    MyLAMP.KILL = BTN_OFF.VALUE or hw.SW_OFF.ON or T_Light.DN
+    T_Light.EN = MyLAMP.STATE
     COUNTDOWN.VALUE = (T_Light.PRE - T_Light.ACC)/1000 + 1
     LAMP_STATE.VALUE = hw.LED1.STATE = T_Light.TT
+
+    # Drop discrete input tags below
     BTN_ON.trigger('OFF')
     BTN_OFF.trigger('OFF')
     pass
