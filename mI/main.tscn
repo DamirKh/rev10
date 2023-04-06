@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://composites/images/BackImage.svg" type="Texture" id=1]
 [ext_resource path="res://composites/Indications/Lamp_ON_OFF.tscn" type="PackedScene" id=2]
+[ext_resource path="res://composites/Sliders/Slider_accept.tscn" type="PackedScene" id=5]
 [ext_resource path="res://composites/buttons/Button_ON.tscn" type="PackedScene" id=6]
+[ext_resource path="res://composites/Indications/Hided_Label.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Top_Connection_Control/Navigation_Control.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/mI/Organiser.gd" type="Script" id=13]
 [ext_resource path="res://composites/buttons/Button_OFF.tscn" type="PackedScene" id=14]
@@ -32,6 +34,7 @@ margin_top = 552.096
 margin_right = 94.8094
 margin_bottom = 646.096
 rect_scale = Vector2( 1.5, 1.5 )
+Tag = "BTN_ON"
 
 [node name="OFF" parent="mI_Organizer2" instance=ExtResource( 14 )]
 self_modulate = Color( 0.94902, 0.423529, 0.423529, 1 )
@@ -40,8 +43,19 @@ margin_top = 552.095
 margin_right = 291.952
 margin_bottom = 646.095
 rect_scale = Vector2( 1.5, 1.5 )
+Tag = "BTN_OFF"
+Command = "ON"
 
 [node name="Lamp_with_Light" parent="." instance=ExtResource( 2 )]
 position = Vector2( 357.143, 528.571 )
 scale = Vector2( 2.42857, 2.42857 )
 Tag = "LAMP"
+
+[node name="mI_Organizer" parent="Lamp_with_Light" instance=ExtResource( 7 )]
+position = Vector2( -49.4119, -82.941 )
+
+[node name="mI_Organizer5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 155.714, 730 )
+Tag = "LIGHT_TIME"
+MinValue = 5
+MaxValue = 50

@@ -17,31 +17,37 @@ from logic import PID
 # ############################## PIDs
 
 # ##############################  timers, counters, sparks
-T_5sec = Timer(preset=5_000)
+T_Light = Timer(preset=5_000)
 Trigger = JK()
-ONS = OneShoot()
+
 
 # ############################# reversibles
 
 # ############################## TAGS
-COMMAND = tag.DiscreteInputTag('COMMAND')
-REMOTE_CONTROL = tag.DiscreteOutputTag('REMOTE_CONTROL')
+BTN_ON = tag.DiscreteInputTag('BTN_ON')
+BTN_OFF = tag.DiscreteInputTag('BTN_OFF')
 LAMP_STATE = tag.DiscreteOutputTag('LAMP')
+COUNTDOWN = tag.IntOutputTag('COUNTDOWN')
+LIGHT_TIME = tag.IntInputTag('LIGHT_TIME')
 
 def onstart():
     print('Start application')
     # Start code below
-    T_5sec.EN = OFF
+    T_Light.EN = OFF
     hw.LED1.STATE = OFF
-    REMOTE_CONTROL.VALUE=ON
+    LIGHT_TIME.trigger(T_Light.PRE/1000)
+    COUNTDOWN.VALUE = T_Light.PRE/1000
 
 def normal():
     # Normal executed code below
-    ONS.EN = COMMAND.VALUE
-    T_5sec.EN = T_5sec.TT or ONS.EN
-    if T_5sec.DN:
-        COMMAND.trigger('OFF')
-    LAMP_STATE.VALUE = hw.LED1.STATE = T_5sec.TT
+    T_Light.PRE = LIGHT_TIME.VALUE * 1000
+    Trigger.JUMP = BTN_ON.VALUE or hw.SW_ON.ON
+    Trigger.KILL = BTN_OFF.VALUE or hw.SW_OFF.ON or T_Light.DN
+    T_Light.EN = Trigger.STATE
+    COUNTDOWN.VALUE = (T_Light.PRE - T_Light.ACC)/1000 + 1
+    LAMP_STATE.VALUE = hw.LED1.STATE = T_Light.TT
+    BTN_ON.trigger('OFF')
+    BTN_OFF.trigger('OFF')
     pass
 
 def onstop():
