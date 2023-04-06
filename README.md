@@ -3,7 +3,7 @@ The proposed software package is designed to create small automation devices.
 
 ##### Main ideas:
 
-1. using a separate device (for example, a telephone) as a human-machine interface
+1. using a separate device (for example, a smartphone) as a human-machine interface
 2. Ability to directly connect HMI - esp32 without external dependencies. (I don’t want to lose the opportunity to turn on the light somewhere due to a non-working mqtt broker)
 3. Hardware - ESP32
 4. The software part of the controller - a set of libraries and an engine in micropython
