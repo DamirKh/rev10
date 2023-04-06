@@ -17,6 +17,16 @@ class Timer:
             self._last_tick = ticks_ms()
 
     @property
+    def PRE(self):
+        """Timer Preset"""
+        return self.preset
+
+    @PRE.setter
+    def PRE(self, val):
+        """Change Timer Preset"""
+        self.preset = val
+
+    @property
     def EN(self):
         """Does timer counting?"""
         return self._enabled
