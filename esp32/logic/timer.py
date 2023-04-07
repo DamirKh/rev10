@@ -28,7 +28,7 @@ class Timer:
 
     @property
     def EN(self):
-        """Does timer counting?"""
+        """Does timer enabled?"""
         return self._enabled
 
     @EN.setter
