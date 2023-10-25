@@ -54,4 +54,4 @@ def normal():
 
 def onstop():
     print("Stop application")
-    # Start code below
+    # Stop code below

@@ -1,3 +1,4 @@
+
 print("Globals loading...")
 from primitives.queue import Queue
 
