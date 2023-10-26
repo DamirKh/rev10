@@ -11,8 +11,8 @@ from neopixel import NeoPixel
 from machine import TouchPad
 
 # Switches
-SW_ON = switch_ladder.Switch_ladder(Pin(5, Pin.IN), inverted=True)
-SW_OFF = switch_ladder.Switch_ladder(Pin(6, Pin.IN), inverted=True)
+SW_ON = switch_ladder.Switch_ladder(Pin(5, Pin.IN), inverted=False)
+SW_OFF = switch_ladder.Switch_ladder(Pin(6, Pin.IN), inverted=False)
 
 # Touches
 #T_BLACK = TouchPad(Pin(12))
