@@ -33,7 +33,23 @@ class DOut(ForcedCommon):
     @STATE.setter
     def STATE(self, v):
         self._value = True if v else False
+        if self.force_enabled:
+            return
         if self._value:
             self._on()
         else:
             self._off()
+
+    def force_value(self, value: bool):
+        self._force_value = value
+        if self.force_enabled:
+            if value: self._on()
+            else: self._off()
+
+    def enable_force(self):
+        self._force_enabled = True
+        self.force_value(self._force_value)
+
+    def disable_force(self):
+        self._force_enabled = False
+        self.STATE = self.STATE
