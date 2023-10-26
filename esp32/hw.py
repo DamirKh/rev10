@@ -19,6 +19,7 @@ SW_OFF = switch_ladder.Switch_ladder(Pin(6, Pin.IN), inverted=True)
 
 # LEDS/RELAYS
 LED1 = DOut(pin_number=42)
+LED2 = DOut(pin_number=41)
 
 #PWM output
 # pwm0 = PWM(Pin(23), freq=10, duty=0)         # create PWM object from a pin

@@ -1,8 +1,10 @@
 from primitives import Switch
+from machine import Pin
 
 
 class PinInversable():
     def __init__(self, pin, inverted=False):
+        assert isinstance(pin, Pin), "pin should be an instance of machine.Pin"
         self._pin = pin
         self._inverted = inverted
 
