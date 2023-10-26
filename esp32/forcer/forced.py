@@ -15,4 +15,4 @@ class ForcedCommon():
 
     @forced.setter
     def forced(self, enable=False):
-        self.__force_value = None if not enable else
+        self.__force_value = None if not enable else None
