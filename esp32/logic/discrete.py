@@ -20,7 +20,7 @@ class DOut(ForcedCommon):
         else:
             self.name = name
         print('Discrete Output [{}] on pin {} initialized. Inverted={}'.format(self.name, pin_number, self._invert))
-        super().__init__()
+        ForcedCommon.__init__(self)
 
     def _on(self):
         self._pin.value(not self._invert)

@@ -38,22 +38,32 @@ class Forcer:
             EnDis_str = 'Enabled' if self._enable else 'Disabled'
             if forcer_command.upper() == '!':                                              # List of all forced ojects #
                 # await self.swriter.awrite("#{}:\r\n".format(forcer_command))
-                await self.swriter.awrite("# Forces {}:\r\n".format(EnDis_str))
+                self.swriter.write("# Forces {}\r\n".format(EnDis_str))
                 counter = 0
                 for name, obj in self.objects.items():
                     if obj.get_force_value() is not None:
-                        await self.swriter.awrite("- [{}] force value={}\r\n".format(name, obj.get_force_value()))
+                        self.swriter.write("- [{}] force value={}\r\n".format(name, obj.get_force_value()))
                         counter+=1
-                await self.swriter.awrite("# Done. {} forces total\r\n".format(counter))
+                self.swriter.write("# {} forces total\r\n".format(counter))
+                await self.swriter.drain()
                 continue
             if forcer_command.upper() == '?':                                          # List of all registered ojects #
                 # await self.swriter.awrite("#{}:\r\n".format(forcer_command))
-                await self.swriter.awrite("# Forces {}:\r\n".format(EnDis_str))
+                self.swriter.write("# Forces {}\r\n".format(EnDis_str))
                 counter = 0
                 for name, obj in self.objects.items():
-                    await self.swriter.awrite("- [{}] force value={}\r\n".format(name, obj.get_force_value()))
+                    forced_value = obj.get_force_value()
+                    # print(forced_value)
+                    if forced_value is None:
+                        forced_value_str = ''
+                        set_or_unset = '-'
+                    else:
+                        forced_value_str = forced_value
+                        set_or_unset = '+'
+                    self.swriter.write("{} {} {}\r\n".format(set_or_unset, name, forced_value_str))
                     counter+=1
-                await self.swriter.awrite("# Done. {} objects registered\r\n".format(counter))
+                self.swriter.write("# {} objects registered\r\n".format(counter))
+                await self.swriter.drain()
                 continue
             if forcer_command.upper()[0] == '?':                                                         # object info #
                 try:
@@ -63,14 +73,15 @@ class Forcer:
                     continue
                 obj = self.objects.get(obj_name)
                 if obj is None:
-                    await self.swriter.awrite("# No such object {}:\r\n".format(obj_name))
+                    await self.swriter.awrite(NO_SUCH_OBJECT_STR.format(obj_name))
                     continue
                 # await self.swriter.awrite("#{}:\r\n".format(forcer_command))
-                await self.swriter.awrite(FORCES_STR.format(EnDis_str))
-                await self.swriter.awrite(OBJECT_STR.format(obj_name))
-                await self.swriter.awrite(FORCE_VALUE_STR.format(obj.get_force_value()))
-                await self.swriter.awrite(REAL_VALUE_STR.format(obj.get_real()))
-                await self.swriter.awrite(LOGIC_VALUE_STR.format(obj.get_logic_value()))
+                self.swriter.write(FORCES_STR.format(EnDis_str))
+                self.swriter.write(OBJECT_STR.format(obj_name))
+                self.swriter.write(FORCE_VALUE_STR.format(obj.get_force_value()))
+                self.swriter.write(REAL_VALUE_STR.format(obj.get_real()))
+                self.swriter.write(LOGIC_VALUE_STR.format(obj.get_logic_value()))
+                await self.swriter.drain()
                 continue
             if forcer_command.upper() == '!E':                                                         # enable forces #
                 self._enable = True
@@ -105,10 +116,12 @@ class Forcer:
                     await self.swriter.awrite(INCORRECT_VALUE_STR.format(valeval))
                     continue
                 obj.force_value(valeval)
-                await self.swriter.awrite(FORCES_STR.format(EnDis_str))
-                await self.swriter.awrite(OBJECT_STR.format(obj_name))
-                await self.swriter.awrite(FORCE_VALUE_STR.format(obj.get_force_value()))
-                await self.swriter.awrite(REAL_VALUE_STR.format(obj.get_real()))
+                self.swriter.write(FORCES_STR.format(EnDis_str))
+                self.swriter.write(OBJECT_STR.format(obj_name))
+                self.swriter.write(FORCE_VALUE_STR.format(obj.get_force_value()))
+                self.swriter.write(REAL_VALUE_STR.format(obj.get_real()))
+                self.swriter.write(LOGIC_VALUE_STR.format(obj.get_logic_value()))
+                await self.swriter.drain()
                 continue
 
             else:
